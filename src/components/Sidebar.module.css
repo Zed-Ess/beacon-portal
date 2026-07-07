@@ -27,8 +27,15 @@
 }
 
 .lamp {
-  font-size: 1.75rem;
+  display: flex;
+  align-items: center;
   flex-shrink: 0;
+}
+
+.lamp img {
+  height: 32px;
+  width: auto;
+  display: block;
 }
 
 .name {

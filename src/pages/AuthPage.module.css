@@ -22,9 +22,15 @@
 }
 
 .lamp {
-  font-size: 2.5rem;
   display: block;
-  margin-bottom: 0.5rem;
+  margin: 0 auto 0.75rem;
+}
+
+.lamp img {
+  height: 56px;
+  width: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .brand h1 {

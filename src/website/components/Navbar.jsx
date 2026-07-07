@@ -25,7 +25,7 @@ export default function Navbar() {
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
       <div className={styles.inner}>
         <Link to="/" className={styles.brand} onClick={() => setOpen(false)}>
-          <span className={styles.lamp}>🏮</span>
+          <img src="/beacon-portal/beaconlogo.png" alt="Beacon Educational Consult" className={styles.logo} />
           <div className={styles.brandText}>
             <span className={styles.name}>Beacon Educational Consult</span>
             <span className={styles.sub}>NaCCA/GES Aligned Academic Materials</span>

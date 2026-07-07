@@ -5,7 +5,7 @@ export default function Agreement() {
     <div className={styles.page}>
 
       <header className={styles.docHeader}>
-        <span className={styles.lamp}>🏮</span>
+        <img src="/beacon-portal/beaconlogo.png" alt="Beacon Educational Consult" className={styles.lamp} />
         <h2>Beacon Educational Consult</h2>
         <p>Partnership Agreement &mdash; Joint Development and Sale of Academic Materials</p>
         <p className={styles.subtitle}>

@@ -9,7 +9,12 @@
   margin-bottom: 1.5rem;
 }
 
-.lamp { font-size: 2rem; display: block; margin-bottom: 0.4rem; }
+.lamp {
+  height: 56px;
+  width: auto;
+  display: block;
+  margin: 0 auto 0.75rem;
+}
 
 .docHeader h2 {
   font-size: 1.35rem;

@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <div className={styles.brand}>
-          <span className={styles.lamp}>🏮</span>
+          <img src="/beacon-portal/beaconlogo.png" alt="Beacon Educational Consult" className={styles.logo} />
           <div>
             <span className={styles.name}>Beacon Educational Consult</span>
             <span className={styles.tagline}>A teacher-led educational publishing and professional development partnership producing NaCCA-aligned academic materials for Ghanaian basic schools.</span>

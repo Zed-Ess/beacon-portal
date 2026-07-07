@@ -17,7 +17,7 @@ export default function About() {
 
       <section className={styles.hero}>
         <div className={styles.heroInner}>
-          <span className={styles.lamp}>🏮</span>
+          <img src="/beacon-portal/beaconlogo.png" alt="Beacon Educational Consult" className={styles.lamp} />
           <h1>About Beacon Educational Consult</h1>
           <p>A partnership of practicing Ghanaian teachers, building the curriculum materials our schools actually need.</p>
         </div>

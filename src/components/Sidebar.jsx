@@ -25,7 +25,7 @@ export default function Sidebar({ active, onNav, mobileOpen, onClose }) {
       )}
       <aside className={`${styles.sidebar} ${mobileOpen ? styles.open : ""}`}>
         <div className={styles.brand}>
-          <span className={styles.lamp}>🏮</span>
+          <span className={styles.lamp}><img src="/beacon-portal/beaconlogo.png" alt="Beacon Educational Consult" /></span>
           <div>
             <span className={styles.name}>Beacon</span>
             <span className={styles.sub}>Partner Portal</span>

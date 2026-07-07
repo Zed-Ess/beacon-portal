@@ -23,7 +23,12 @@
   min-width: 200px;
 }
 
-.lamp { font-size: 1.6rem; flex-shrink: 0; }
+.logo {
+  height: 40px;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+}
 
 .name {
   display: block;

@@ -81,7 +81,7 @@ export default function AuthPage() {
     <div className={styles.page}>
       <div className={styles.card}>
         <div className={styles.brand}>
-          <span className={styles.lamp}>🏮</span>
+          <span className={styles.lamp}><img src="/beacon-portal/beaconlogo.png" alt="Beacon Educational Consult" /></span>
           <h1>Beacon Educational Consult</h1>
           <p>Partner Portal</p>
         </div>

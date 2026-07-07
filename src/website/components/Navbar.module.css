@@ -31,7 +31,12 @@
   flex-shrink: 0;
 }
 
-.lamp { font-size: 1.6rem; }
+.logo {
+  height: 36px;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+}
 
 .brandText { line-height: 1.2; }
 

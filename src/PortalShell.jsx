@@ -22,7 +22,7 @@ export default function PortalShell() {
   if (loading) {
     return (
       <div className="splash">
-        <span className="splashLamp">🏮</span>
+        <img src="/beacon-portal/beaconlogo.png" alt="Beacon" className="splashLamp" />
         <p>Loading…</p>
       </div>
     );
