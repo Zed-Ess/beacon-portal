@@ -8,15 +8,30 @@ import { auth, db } from "../firebase";
 import styles from "./AuthPage.module.css";
 
 const DEPARTMENTS = [
-  "Mathematics",
-  "English",
-  "Science",
-  "Social Studies",
-  "ICT",
-  "Creative Arts",
-  "French",
-  "All Departments",
+  "Pre-School",
+  "Lower Primary",
+  "Upper Primary",
+  "JHS",
+  "Upper Primary & JHS",
 ];
+
+const SUBJECTS = [
+  "Ghanaian Language", 
+  "English Language", 
+  "French Language", 
+  "Integrated Science", 
+  "R.M.E", 
+  "Social Studies",
+  "History",
+  "Creative Arts",
+  "Career Technology",
+  "Computing",
+  "Numeracy",
+  "⁠Literacy",
+  "⁠Science",
+  "⁠Creativity",
+  "⁠Our World our People",
+]
 
 export default function AuthPage() {
   const [mode, setMode]       = useState("login"); // "login" | "register"
@@ -24,7 +39,7 @@ export default function AuthPage() {
   const [password, setPass]   = useState("");
   const [name, setName]       = useState("");
   const [dept, setDept]       = useState(DEPARTMENTS[0]);
-  const [subjects, setSubj]   = useState("");
+  const [subjects, setSubj]   = useState(SUBJECTS[0]);
   const [error, setError]     = useState("");
   const [busy, setBusy]       = useState(false);
 
