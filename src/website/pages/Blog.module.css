@@ -1,14 +1,14 @@
 .page { width: 100%; }
 
 .hero {
-  background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
-  padding: 3.5rem 1.5rem 3rem;
+  background: linear-gradient(135deg, #162849 0%, #2a4d8f 100%);
+  padding: 7rem 1.5rem 3.5rem;
   text-align: center;
 }
 
 .heroInner { max-width: 600px; margin: 0 auto; }
 .hero h1 { font-size: clamp(1.6rem,4vw,2.5rem); font-weight: 800; color: #fff; margin: 0 0 0.75rem; }
-.hero p { color: #9ca3af; font-size: 0.95rem; line-height: 1.6; margin: 0; }
+.hero p { color: rgba(255,255,255,0.65); font-size: 0.95rem; line-height: 1.6; margin: 0; }
 
 .body { max-width: 1000px; margin: 0 auto; padding: 2.5rem 1.5rem; }
 
@@ -30,8 +30,8 @@
   transition: all 0.15s;
 }
 
-.catBtn:hover { border-color: #e85d26; color: #e85d26; }
-.activeCat { background: #e85d26 !important; border-color: #e85d26 !important; color: #fff !important; }
+.catBtn:hover { border-color: #1F3864; color: #1F3864; }
+.activeCat { background: #1F3864 !important; border-color: #1F3864 !important; color: #fff !important; }
 
 .grid {
   display: grid;
@@ -96,7 +96,7 @@
 .readBtn {
   font-size: 0.82rem;
   font-weight: 600;
-  color: #e85d26;
+  color: #1F3864;
   background: transparent;
   border: none;
   cursor: pointer;

@@ -1,0 +1,1754 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Beacon Educational Consult — NaCCA-aligned Schemes of Work, Lesson Notes, Exam Questions, Textbooks and Workbooks created by practicing teachers for Ghanaian basic schools.">
+  <title>Beacon Educational Consult — Quality Academic Materials for Ghanaian Schools</title>
+  <style>
+    /* ── Reset & base ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #1F3864;
+      --navy-dark:  #162849;
+      --navy-mid:   #2a4d8f;
+      --gold:       #C9A227;
+      --gold-light: #FFF8E7;
+      --gold-mid:   #e8b830;
+      --white:      #ffffff;
+      --surface:    #f7f9fc;
+      --border:     #dde4f0;
+      --text:       #1a2236;
+      --text-2:     #4b5878;
+      --text-3:     #8a96b0;
+      --success:    #27ae60;
+      --radius:     10px;
+      --shadow:     0 4px 24px rgba(31,56,100,0.10);
+      --shadow-lg:  0 8px 40px rgba(31,56,100,0.16);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Buttons ──────────────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--navy);
+      border-color: var(--gold);
+    }
+
+    .btn-gold:hover {
+      background: var(--gold-mid);
+      border-color: var(--gold-mid);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(201,162,39,0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border-color: rgba(255,255,255,0.6);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--white);
+    }
+
+    .btn-navy {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+
+    .btn-navy:hover {
+      background: var(--navy-dark);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+
+    /* ── Navigation ───────────────────────────────────────────────────────── */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: transparent;
+      transition: all 0.3s;
+      padding: 0;
+    }
+
+    .navbar.scrolled {
+      background: var(--navy-dark);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+    }
+
+    .navbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--white);
+    }
+
+    .navbar-brand-icon { font-size: 26px; }
+
+    .navbar-brand-text { line-height: 1.2; }
+    .navbar-brand-name {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .navbar-brand-sub {
+      font-size: 10px;
+      opacity: 0.65;
+      font-weight: 400;
+    }
+
+    .navbar-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .navbar-links a {
+      color: rgba(255,255,255,0.8);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+
+    .navbar-links a:hover {
+      color: var(--white);
+      background: rgba(255,255,255,0.1);
+    }
+
+    .navbar-cta {
+      background: var(--gold);
+      color: var(--navy) !important;
+      font-weight: 700 !important;
+      border-radius: 8px;
+      padding: 8px 16px !important;
+    }
+
+    .navbar-cta:hover {
+      background: var(--gold-mid) !important;
+      color: var(--navy) !important;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .mobile-menu {
+      display: none;
+      background: var(--navy-dark);
+      padding: 12px 24px 20px;
+    }
+
+    .mobile-menu a {
+      display: block;
+      color: rgba(255,255,255,0.85);
+      font-size: 15px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* ── Hero ─────────────────────────────────────────────────────────────── */
+    #home {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-mid) 60%, #1a5276 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 80px;
+    }
+
+    .hero-bg-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+      background-image: repeating-linear-gradient(
+        45deg,
+        var(--white) 0, var(--white) 1px,
+        transparent 0, transparent 50%
+      );
+      background-size: 30px 30px;
+    }
+
+    .hero-gold-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(201,162,39,0.15);
+      border: 1px solid rgba(201,162,39,0.3);
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-title span { color: var(--gold); }
+
+    .hero-subtitle {
+      font-size: 17px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      max-width: 580px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 52px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--gold);
+    }
+
+    .hero-stat-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+      margin-top: 2px;
+    }
+
+    /* ── Section shared ───────────────────────────────────────────────────── */
+    section { padding: 80px 0; }
+
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-subtitle {
+      font-size: 16px;
+      color: var(--text-2);
+      max-width: 600px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    .section-header-center {
+      text-align: center;
+    }
+
+    .section-header-center .section-subtitle {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .gold-underline {
+      display: inline-block;
+      position: relative;
+    }
+
+    .gold-underline::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+
+    /* ── Why Beacon ───────────────────────────────────────────────────────── */
+    #why { background: var(--surface); }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .pillar-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 24px;
+      transition: all 0.2s;
+    }
+
+    .pillar-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--gold);
+    }
+
+    .pillar-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--gold-light);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+
+    .pillar-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .pillar-body {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+
+    /* ── About ────────────────────────────────────────────────────────────── */
+    #about { background: var(--white); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .mission-card {
+      background: var(--navy);
+      border-radius: 16px;
+      padding: 32px;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .mission-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .mission-text {
+      font-size: 14px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .vision-card {
+      background: var(--gold-light);
+      border: 1px solid rgba(201,162,39,0.3);
+      border-radius: 16px;
+      padding: 28px 32px;
+    }
+
+    .vision-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+    }
+
+    .vision-text {
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--navy);
+      font-style: italic;
+    }
+
+    .about-right h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+
+    .about-right p {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    .purpose-list {
+      list-style: none;
+      margin-top: 24px;
+    }
+
+    .purpose-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 13px;
+      color: var(--text-2);
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    .purpose-list li::before {
+      content: "✦";
+      color: var(--gold);
+      font-size: 10px;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    /* ── Materials catalogue ──────────────────────────────────────────────── */
+    #materials { background: var(--surface); }
+
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+      justify-content: center;
+    }
+
+    .filter-btn {
+      padding: 7px 18px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--text-2);
+      transition: all 0.15s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .material-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+
+    .material-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .material-card-top {
+      background: var(--navy);
+      padding: 20px 20px 16px;
+      position: relative;
+    }
+
+    .material-dept {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+
+    .material-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    .material-type-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.8);
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .material-card-body {
+      padding: 16px 20px;
+    }
+
+    .material-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .meta-tag {
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+    .tag-subject  { background: #e8edf8; color: var(--navy); }
+    .tag-grade    { background: #e8f2fc; color: #1a5276; }
+    .tag-term     { background: var(--gold-light); color: #7a5a00; }
+    .tag-nacca    { background: #e8f8ef; color: #1a5e35; }
+
+    .material-desc {
+      font-size: 12px;
+      color: var(--text-2);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .material-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .material-price {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .material-price-unit {
+      font-size: 11px;
+      color: var(--text-3);
+      font-weight: 400;
+    }
+
+    .order-btn {
+      padding: 7px 16px;
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .order-btn:hover {
+      background: var(--gold-mid);
+      transform: translateY(-1px);
+    }
+
+    .coming-soon-strip {
+      text-align: center;
+      margin-top: 40px;
+      padding: 24px;
+      background: var(--white);
+      border: 1.5px dashed var(--border);
+      border-radius: 14px;
+      color: var(--text-3);
+      font-size: 13px;
+    }
+
+    .coming-soon-strip strong { color: var(--navy); }
+
+    /* ── Workshops ────────────────────────────────────────────────────────── */
+    #workshops { background: var(--white); }
+
+    .coming-soon-banner {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      border-radius: 20px;
+      padding: 60px 40px;
+      text-align: center;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .coming-soon-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.05;
+      background-image: repeating-linear-gradient(
+        45deg, var(--white) 0, var(--white) 1px, transparent 0, transparent 50%
+      );
+      background-size: 20px 20px;
+    }
+
+    .coming-soon-banner h3 {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 14px;
+      position: relative;
+    }
+
+    .coming-soon-banner p {
+      font-size: 15px;
+      opacity: 0.75;
+      max-width: 520px;
+      margin: 0 auto 28px;
+      line-height: 1.7;
+      position: relative;
+    }
+
+    .workshop-types {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .workshop-type {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 10px;
+      padding: 16px 20px;
+      text-align: center;
+      min-width: 140px;
+    }
+
+    .workshop-type-icon { font-size: 24px; margin-bottom: 6px; }
+    .workshop-type-label { font-size: 13px; font-weight: 600; }
+
+    .notify-form {
+      display: flex;
+      gap: 10px;
+      max-width: 440px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .notify-form input {
+      flex: 1;
+      padding: 11px 16px;
+      border-radius: 8px;
+      border: none;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .notify-form input:focus { outline: none; }
+
+    .notify-form button {
+      padding: 11px 20px;
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+
+    .notify-form button:hover { background: var(--gold-mid); }
+
+    /* ── Contact ──────────────────────────────────────────────────────────── */
+    #contact { background: var(--surface); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .contact-info h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+
+    .contact-info p {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .contact-item-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--gold-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .contact-item-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 3px;
+    }
+
+    .contact-item-value {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .contact-form {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .contact-form h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-2);
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--text);
+      background: var(--white);
+      transition: border-color 0.15s;
+      font-family: inherit;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(31,56,100,0.08);
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    .form-submit {
+      width: 100%;
+      padding: 13px;
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 4px;
+    }
+
+    .form-submit:hover {
+      background: var(--navy-dark);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+
+    .form-success {
+      display: none;
+      background: #e8f8ef;
+      border: 1px solid #b8e6cc;
+      border-radius: 8px;
+      padding: 14px;
+      color: #1a5e35;
+      font-size: 13px;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    /* ── Order modal ──────────────────────────────────────────────────────── */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 28px;
+      max-width: 480px;
+      width: 100%;
+      transform: translateY(10px);
+      transition: transform 0.2s;
+    }
+
+    .modal-backdrop.open .modal { transform: translateY(0); }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .modal-title { font-size: 17px; font-weight: 700; color: var(--navy); }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: var(--text-3);
+      line-height: 1;
+    }
+
+    .modal-subtitle { font-size: 12px; color: var(--text-3); margin-bottom: 20px; }
+
+    /* ── Footer ───────────────────────────────────────────────────────────── */
+    footer {
+      background: var(--navy-dark);
+      color: rgba(255,255,255,0.7);
+      padding: 48px 0 24px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      color: var(--white);
+    }
+
+    .footer-brand-icon { font-size: 24px; }
+    .footer-brand-name { font-size: 15px; font-weight: 700; }
+
+    .footer-desc {
+      font-size: 13px;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .footer-heading {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+    }
+
+    .footer-links { list-style: none; }
+
+    .footer-links li { margin-bottom: 8px; }
+
+    .footer-links a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      transition: color 0.15s;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 20px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .footer-nacca-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(201,162,39,0.15);
+      border: 1px solid rgba(201,162,39,0.25);
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 12px;
+    }
+
+    /* ── Responsive ───────────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .navbar-links { display: none; }
+      .mobile-menu-btn { display: block; }
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .hero-stats { gap: 24px; }
+      .form-row { grid-template-columns: 1fr; }
+      section { padding: 56px 0; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-actions { flex-direction: column; }
+      .notify-form { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ────────────────────────────────────────────────────────────── -->
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href="#home" class="navbar-brand">
+      <span class="navbar-brand-icon">🏮</span>
+      <div class="navbar-brand-text">
+        <div class="navbar-brand-name">Beacon Educational Consult</div>
+        <div class="navbar-brand-sub">NaCCA/GES Aligned Academic Materials</div>
+      </div>
+    </a>
+    <ul class="navbar-links">
+      <li><a href="#why">Why Beacon</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#materials">Materials</a></li>
+      <li><a href="#workshops">Workshops</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#contact" class="navbar-cta">Order now</a></li>
+    </ul>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Open menu">☰</button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#why"       onclick="toggleMobileMenu()">Why Beacon</a>
+    <a href="#about"     onclick="toggleMobileMenu()">About</a>
+    <a href="#materials" onclick="toggleMobileMenu()">Materials</a>
+    <a href="#workshops" onclick="toggleMobileMenu()">Workshops</a>
+    <a href="#contact"   onclick="toggleMobileMenu()">Contact</a>
+  </div>
+</nav>
+
+<!-- ── HERO ──────────────────────────────────────────────────────────────── -->
+<section id="home">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-gold-bar"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        🏮 &nbsp;Teacher-led · Ghana-rooted · NaCCA aligned
+      </div>
+      <h1 class="hero-title">
+        Quality academic<br>materials for every<br>
+        <span>Ghanaian classroom</span>
+      </h1>
+      <p class="hero-subtitle">
+        Beacon Educational Consult develops and supplies NaCCA/GES-aligned Schemes of Work,
+        Lesson Notes, Examination Questions, Textbooks, and Workbooks —
+        created by practicing teachers, for practicing teachers.
+      </p>
+      <div class="hero-actions">
+        <a href="#materials" class="btn btn-gold">Browse materials</a>
+        <a href="#contact"   class="btn btn-outline">Contact us</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-value">4</div>
+          <div class="hero-stat-label">Departments covered</div>
+        </div>
+        <div>
+          <div class="hero-stat-value">11</div>
+          <div class="hero-stat-label">Grade levels</div>
+        </div>
+        <div>
+          <div class="hero-stat-value">100%</div>
+          <div class="hero-stat-label">NaCCA aligned</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY BEACON ─────────────────────────────────────────────────────────── -->
+<section id="why">
+  <div class="container">
+    <div class="section-header-center">
+      <div class="section-eyebrow">Why choose us</div>
+      <h2 class="section-title">Built by teachers, <span class="gold-underline">for teachers</span></h2>
+      <p class="section-subtitle">
+        Every material Beacon produces is authored by currently practising classroom teachers
+        and goes through a rigorous multi-stage review before it reaches your school.
+      </p>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-icon">📐</div>
+        <div class="pillar-title">NaCCA/GES aligned</div>
+        <div class="pillar-body">Every material cites the exact content standard and performance indicator codes from the NaCCA Basic School Curriculum — no guesswork.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">🏫</div>
+        <div class="pillar-title">Classroom-tested</div>
+        <div class="pillar-body">Materials are piloted in real Ghanaian classrooms by our teacher-authors before release. What you receive has already worked in practice.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">✅</div>
+        <div class="pillar-title">Quality reviewed</div>
+        <div class="pillar-body">Each material passes a nine-stage production workflow including curriculum alignment check, editorial review, and senior sign-off before publication.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">📚</div>
+        <div class="pillar-title">Full coverage</div>
+        <div class="pillar-body">Materials span Pre-School through JHS — Nursery, KG, Basic 1–9 — covering all core subjects across every level of the basic school system.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">🤝</div>
+        <div class="pillar-title">Teacher-led</div>
+        <div class="pillar-body">Beacon is a teacher-owned partnership. We are not a distant publisher — we are educators who understand exactly what schools and teachers need.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">💰</div>
+        <div class="pillar-title">School-friendly pricing</div>
+        <div class="pillar-body">Priced to be accessible to Ghanaian basic schools. We keep our costs lean so that quality materials are within reach of every school's budget.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ──────────────────────────────────────────────────────────────── -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-left">
+        <div class="section-eyebrow">Who we are</div>
+        <h2 class="section-title" style="margin-bottom:24px">Our mission<br>&amp; vision</h2>
+        <div class="mission-card">
+          <div class="mission-label">Mission</div>
+          <div class="mission-text">
+            Beacon Educational Consult develops and supplies NaCCA-aligned Schemes of Work,
+            Lesson Notes, Examination Questions, Textbooks, and Workbooks — created by
+            practicing teachers for practicing teachers — to improve the quality and
+            consistency of instruction in basic schools across Ghana.
+          </div>
+        </div>
+        <div class="vision-card">
+          <div class="vision-label">Vision</div>
+          <div class="vision-text">
+            To become a leading teacher-led source of academic materials in Ghana,
+            known for curriculum accuracy, classroom relevance, and dependable quality.
+          </div>
+        </div>
+      </div>
+      <div class="about-right">
+        <div class="section-eyebrow">Our story</div>
+        <h3>A consortium of experienced educators</h3>
+        <p>
+          Beacon Educational Consult was founded by a group of experienced Ghanaian teachers
+          who recognised a gap in the market for high-quality, curriculum-accurate academic
+          materials that actually reflect how teaching and learning happens in Ghanaian
+          basic school classrooms.
+        </p>
+        <p>
+          What began as a conversation among colleagues has grown into a structured,
+          teacher-led publishing and professional development partnership — united by
+          the belief that teachers, not distant publishers, are best placed to create
+          the materials that shape how Ghanaian children are taught.
+        </p>
+        <ul class="purpose-list">
+          <li>Professional collaboration and resource sharing among experienced educators</li>
+          <li>Development and distribution of curriculum-aligned academic materials</li>
+          <li>Commercial sustainability through the sale of quality educational materials</li>
+          <li>Capacity building through workshops, seminars, and conferences for fellow educators</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MATERIALS ──────────────────────────────────────────────────────────── -->
+<section id="materials">
+  <div class="container">
+    <div class="section-header-center">
+      <div class="section-eyebrow">Our catalogue</div>
+      <h2 class="section-title">Schemes of Work</h2>
+      <p class="section-subtitle">
+        Fully NaCCA-aligned termly Schemes of Work for all subjects and grade levels —
+        ready to use in your school this term.
+      </p>
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterMaterials('all', this)">All levels</button>
+      <button class="filter-btn" onclick="filterMaterials('pre-school', this)">Pre-School</button>
+      <button class="filter-btn" onclick="filterMaterials('lower-primary', this)">Lower Primary</button>
+      <button class="filter-btn" onclick="filterMaterials('upper-primary', this)">Upper Primary</button>
+      <button class="filter-btn" onclick="filterMaterials('jhs', this)">JHS</button>
+    </div>
+
+    <div class="materials-grid" id="materials-grid">
+
+      <div class="material-card" data-dept="lower-primary">
+        <div class="material-card-top">
+          <div class="material-dept">Lower Primary · Basic 1–3</div>
+          <div class="material-title">English Language Scheme of Work</div>
+          <span class="material-type-badge">Scheme of Work</span>
+        </div>
+        <div class="material-card-body">
+          <div class="material-meta">
+            <span class="meta-tag tag-subject">English Language</span>
+            <span class="meta-tag tag-grade">Basic 1, 2 &amp; 3</span>
+            <span class="meta-tag tag-term">All Terms</span>
+            <span class="meta-tag tag-nacca">NaCCA aligned</span>
+          </div>
+          <div class="material-desc">
+            Comprehensive termly Schemes of Work covering all strands, sub-strands, content standards
+            and performance indicators for English Language in Basic 1–3.
+          </div>
+        </div>
+        <div class="material-card-footer">
+          <div>
+            <div class="material-price">GH₵ 25 <span class="material-price-unit">per term</span></div>
+          </div>
+          <button class="order-btn" onclick="openOrder('English Language SoW (Lower Primary)')">Order now</button>
+        </div>
+      </div>
+
+      <div class="material-card" data-dept="lower-primary">
+        <div class="material-card-top">
+          <div class="material-dept">Lower Primary · Basic 1–3</div>
+          <div class="material-title">Mathematics Scheme of Work</div>
+          <span class="material-type-badge">Scheme of Work</span>
+        </div>
+        <div class="material-card-body">
+          <div class="material-meta">
+            <span class="meta-tag tag-subject">Mathematics</span>
+            <span class="meta-tag tag-grade">Basic 1, 2 &amp; 3</span>
+            <span class="meta-tag tag-term">All Terms</span>
+            <span class="meta-tag tag-nacca">NaCCA aligned</span>
+          </div>
+          <div class="material-desc">
+            Structured Schemes of Work for Mathematics across Lower Primary — number, algebra,
+            geometry, and statistics strands fully mapped to NaCCA indicators.
+          </div>
+        </div>
+        <div class="material-card-footer">
+          <div>
+            <div class="material-price">GH₵ 25 <span class="material-price-unit">per term</span></div>
+          </div>
+          <button class="order-btn" onclick="openOrder('Mathematics SoW (Lower Primary)')">Order now</button>
+        </div>
+      </div>
+
+      <div class="material-card" data-dept="upper-primary">
+        <div class="material-card-top">
+          <div class="material-dept">Upper Primary · Basic 4–6</div>
+          <div class="material-title">English Language Scheme of Work</div>
+          <span class="material-type-badge">Scheme of Work</span>
+        </div>
+        <div class="material-card-body">
+          <div class="material-meta">
+            <span class="meta-tag tag-subject">English Language</span>
+            <span class="meta-tag tag-grade">Basic 4, 5 &amp; 6</span>
+            <span class="meta-tag tag-term">All Terms</span>
+            <span class="meta-tag tag-nacca">NaCCA aligned</span>
+          </div>
+          <div class="material-desc">
+            Detailed termly Schemes of Work for English Language at Upper Primary level,
+            including reading, writing, oral language, and grammar strands.
+          </div>
+        </div>
+        <div class="material-card-footer">
+          <div>
+            <div class="material-price">GH₵ 25 <span class="material-price-unit">per term</span></div>
+          </div>
+          <button class="order-btn" onclick="openOrder('English Language SoW (Upper Primary)')">Order now</button>
+        </div>
+      </div>
+
+      <div class="material-card" data-dept="upper-primary">
+        <div class="material-card-top">
+          <div class="material-dept">Upper Primary · Basic 4–6</div>
+          <div class="material-title">Computing Scheme of Work</div>
+          <span class="material-type-badge">Scheme of Work</span>
+        </div>
+        <div class="material-card-body">
+          <div class="material-meta">
+            <span class="meta-tag tag-subject">Computing</span>
+            <span class="meta-tag tag-grade">Basic 4, 5 &amp; 6</span>
+            <span class="meta-tag tag-term">All Terms</span>
+            <span class="meta-tag tag-nacca">NaCCA aligned</span>
+          </div>
+          <div class="material-desc">
+            NaCCA-aligned Computing Schemes of Work covering digital literacy, programming concepts,
+            and ICT applications for Basic 4 through 6.
+          </div>
+        </div>
+        <div class="material-card-footer">
+          <div>
+            <div class="material-price">GH₵ 25 <span class="material-price-unit">per term</span></div>
+          </div>
+          <button class="order-btn" onclick="openOrder('Computing SoW (Upper Primary)')">Order now</button>
+        </div>
+      </div>
+
+      <div class="material-card" data-dept="jhs">
+        <div class="material-card-top">
+          <div class="material-dept">JHS · Basic 7–9</div>
+          <div class="material-title">English Language Scheme of Work</div>
+          <span class="material-type-badge">Scheme of Work</span>
+        </div>
+        <div class="material-card-body">
+          <div class="material-meta">
+            <span class="meta-tag tag-subject">English Language</span>
+            <span class="meta-tag tag-grade">Basic 7, 8 &amp; 9</span>
+            <span class="meta-tag tag-term">All Terms</span>
+            <span class="meta-tag tag-nacca">NaCCA aligned</span>
+          </div>
+          <div class="material-desc">
+            Comprehensive JHS English Language Schemes of Work, aligned to the NaCCA
+            curriculum and informed by BECE examination requirements.
+          </div>
+        </div>
+        <div class="material-card-footer">
+          <div>
+            <div class="material-price">GH₵ 30 <span class="material-price-unit">per term</span></div>
+          </div>
+          <button class="order-btn" onclick="openOrder('English Language SoW (JHS)')">Order now</button>
+        </div>
+      </div>
+
+      <div class="material-card" data-dept="jhs">
+        <div class="material-card-top">
+          <div class="material-dept">JHS · Basic 7–9</div>
+          <div class="material-title">Integrated Science Scheme of Work</div>
+          <span class="material-type-badge">Scheme of Work</span>
+        </div>
+        <div class="material-card-body">
+          <div class="material-meta">
+            <span class="meta-tag tag-subject">Integrated Science</span>
+            <span class="meta-tag tag-grade">Basic 7, 8 &amp; 9</span>
+            <span class="meta-tag tag-term">All Terms</span>
+            <span class="meta-tag tag-nacca">NaCCA aligned</span>
+          </div>
+          <div class="material-desc">
+            NaCCA-aligned Integrated Science Schemes of Work for JHS, covering all science
+            strands with indicator references and recommended teaching activities.
+          </div>
+        </div>
+        <div class="material-card-footer">
+          <div>
+            <div class="material-price">GH₵ 30 <span class="material-price-unit">per term</span></div>
+          </div>
+          <button class="order-btn" onclick="openOrder('Integrated Science SoW (JHS)')">Order now</button>
+        </div>
+      </div>
+
+      <div class="material-card" data-dept="pre-school">
+        <div class="material-card-top">
+          <div class="material-dept">Pre-School · Nursery &amp; KG</div>
+          <div class="material-title">Early Childhood Activity Plan</div>
+          <span class="material-type-badge">Activity Plan</span>
+        </div>
+        <div class="material-card-body">
+          <div class="material-meta">
+            <span class="meta-tag tag-subject">Early Childhood</span>
+            <span class="meta-tag tag-grade">Nursery &amp; KG</span>
+            <span class="meta-tag tag-term">All Terms</span>
+            <span class="meta-tag tag-nacca">GES aligned</span>
+          </div>
+          <div class="material-desc">
+            Structured termly activity plans for Nursery and Kindergarten — language,
+            numeracy, creative arts, and social development activities for young learners.
+          </div>
+        </div>
+        <div class="material-card-footer">
+          <div>
+            <div class="material-price">GH₵ 20 <span class="material-price-unit">per term</span></div>
+          </div>
+          <button class="order-btn" onclick="openOrder('Early Childhood Activity Plan (Pre-School)')">Order now</button>
+        </div>
+      </div>
+
+      <div class="material-card" data-dept="upper-primary">
+        <div class="material-card-top">
+          <div class="material-dept">Upper Primary · Basic 4–6</div>
+          <div class="material-title">Integrated Science Scheme of Work</div>
+          <span class="material-type-badge">Scheme of Work</span>
+        </div>
+        <div class="material-card-body">
+          <div class="material-meta">
+            <span class="meta-tag tag-subject">Integrated Science</span>
+            <span class="meta-tag tag-grade">Basic 4, 5 &amp; 6</span>
+            <span class="meta-tag tag-term">All Terms</span>
+            <span class="meta-tag tag-nacca">NaCCA aligned</span>
+          </div>
+          <div class="material-desc">
+            Termly Schemes of Work for Integrated Science at Upper Primary level,
+            with strand mapping, performance indicators, and suggested resources.
+          </div>
+        </div>
+        <div class="material-card-footer">
+          <div>
+            <div class="material-price">GH₵ 25 <span class="material-price-unit">per term</span></div>
+          </div>
+          <button class="order-btn" onclick="openOrder('Integrated Science SoW (Upper Primary)')">Order now</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="coming-soon-strip">
+      <strong>More subjects coming soon.</strong> Lesson Notes, Examination Questions, Textbooks, and Workbooks are currently in production.
+      <a href="#contact" style="color:var(--navy);font-weight:600;margin-left:6px">Request a specific subject →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── WORKSHOPS ──────────────────────────────────────────────────────────── -->
+<section id="workshops">
+  <div class="container">
+    <div class="section-header-center">
+      <div class="section-eyebrow">Professional development</div>
+      <h2 class="section-title">Workshops &amp; seminars</h2>
+      <p class="section-subtitle">
+        Beacon organises professional development events for teachers across Ghana —
+        sharing curriculum knowledge, teaching strategies, and best practices.
+      </p>
+    </div>
+    <div class="coming-soon-banner">
+      <h3>Events coming soon 🏮</h3>
+      <p>
+        We are currently planning our first series of workshops and seminars for educators.
+        Register your interest below and we will notify you as soon as dates are confirmed.
+      </p>
+      <div class="workshop-types">
+        <div class="workshop-type">
+          <div class="workshop-type-icon">🎓</div>
+          <div class="workshop-type-label">Workshops</div>
+        </div>
+        <div class="workshop-type">
+          <div class="workshop-type-icon">🏛️</div>
+          <div class="workshop-type-label">Seminars</div>
+        </div>
+        <div class="workshop-type">
+          <div class="workshop-type-icon">🌐</div>
+          <div class="workshop-type-label">Conferences</div>
+        </div>
+      </div>
+      <div class="notify-form">
+        <input type="email" id="notify-email" placeholder="Enter your email address">
+        <button onclick="registerNotify()">Notify me</button>
+      </div>
+      <p id="notify-success" style="display:none;color:var(--gold);margin-top:12px;font-size:13px;position:relative">
+        ✓ Thank you — we will be in touch when events are confirmed.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ────────────────────────────────────────────────────────────── -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="section-eyebrow">Get in touch</div>
+        <h2 class="section-title" style="font-size:28px">Order materials or<br>ask us anything</h2>
+        <p>
+          Whether you are a school administrator ordering materials for your teachers,
+          a teacher looking for a specific subject, or an organisation interested in
+          partnering with Beacon — we would love to hear from you.
+        </p>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">📧</div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-value">info@beaconeducationalconsult.com</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📱</div>
+          <div>
+            <div class="contact-item-label">Phone / WhatsApp</div>
+            <div class="contact-item-value">[Your phone number]</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div>
+            <div class="contact-item-label">Location</div>
+            <div class="contact-item-value">Ghana</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🕐</div>
+          <div>
+            <div class="contact-item-label">Response time</div>
+            <div class="contact-item-value">Within 24 hours on school days</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <h3>Send us a message</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your name</label>
+            <input type="text" id="cf-name" placeholder="Full name">
+          </div>
+          <div class="form-group">
+            <label>School / Organisation</label>
+            <input type="text" id="cf-school" placeholder="School name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="email" id="cf-email" placeholder="yourname@example.com">
+        </div>
+        <div class="form-group">
+          <label>Phone / WhatsApp</label>
+          <input type="tel" id="cf-phone" placeholder="0XX XXX XXXX">
+        </div>
+        <div class="form-group">
+          <label>I am enquiring about</label>
+          <select id="cf-subject">
+            <option value="">Select a topic</option>
+            <option>Ordering Schemes of Work</option>
+            <option>Ordering Lesson Notes</option>
+            <option>Ordering Exam Questions</option>
+            <option>Ordering Textbooks or Workbooks</option>
+            <option>Upcoming workshops and events</option>
+            <option>Partnership or collaboration</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="cf-message" rows="4" placeholder="Tell us what you need — subject, grade level, number of copies, etc."></textarea>
+        </div>
+        <button class="form-submit" onclick="submitContact()">Send message</button>
+        <div class="form-success" id="form-success">
+          ✓ Thank you! We have received your message and will respond within 24 hours.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <span class="footer-brand-icon">🏮</span>
+          <span class="footer-brand-name">Beacon Educational Consult</span>
+        </div>
+        <p class="footer-desc">
+          A teacher-led educational publishing and professional development partnership
+          producing NaCCA-aligned academic materials for Ghanaian basic schools.
+        </p>
+        <div class="footer-nacca-badge">✦ NaCCA/GES Aligned</div>
+      </div>
+      <div>
+        <div class="footer-heading">Quick links</div>
+        <ul class="footer-links">
+          <li><a href="#why">Why Beacon</a></li>
+          <li><a href="#about">About us</a></li>
+          <li><a href="#materials">Materials catalogue</a></li>
+          <li><a href="#workshops">Workshops &amp; seminars</a></li>
+          <li><a href="#contact">Contact us</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Materials</div>
+        <ul class="footer-links">
+          <li><a href="#materials">Schemes of Work</a></li>
+          <li><a href="#materials">Lesson Notes</a></li>
+          <li><a href="#materials">Exam Questions</a></li>
+          <li><a href="#materials">Textbooks</a></li>
+          <li><a href="#materials">Workbooks</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-bottom">
+      <span>© 2025 Beacon Educational Consult. All rights reserved.</span>
+      <span>Proudly Ghanaian 🇬🇭</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ── ORDER MODAL ────────────────────────────────────────────────────────── -->
+<div class="modal-backdrop" id="order-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">Place an order</span>
+      <button class="modal-close" onclick="closeOrder()">✕</button>
+    </div>
+    <p class="modal-subtitle" id="order-item-name"></p>
+    <div class="form-group">
+      <label>Your name</label>
+      <input type="text" id="om-name" placeholder="Full name">
+    </div>
+    <div class="form-group">
+      <label>School</label>
+      <input type="text" id="om-school" placeholder="School name">
+    </div>
+    <div class="form-group">
+      <label>Phone / WhatsApp</label>
+      <input type="tel" id="om-phone" placeholder="0XX XXX XXXX">
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="om-email" placeholder="yourname@example.com">
+    </div>
+    <div class="form-group">
+      <label>Number of copies</label>
+      <select id="om-copies">
+        <option>1 copy</option>
+        <option>2–5 copies</option>
+        <option>6–10 copies</option>
+        <option>More than 10 copies</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Term(s) required</label>
+      <select id="om-term">
+        <option>Term 1</option>
+        <option>Term 2</option>
+        <option>Term 3</option>
+        <option>All three terms</option>
+      </select>
+    </div>
+    <button class="form-submit" onclick="submitOrder()">Submit order request</button>
+    <div class="form-success" id="order-success">
+      ✓ Order received! We will contact you within 24 hours to confirm and arrange delivery.
+    </div>
+  </div>
+</div>
+
+<!-- ── SCRIPTS ────────────────────────────────────────────────────────────── -->
+<script>
+  // Navbar scroll effect
+  window.addEventListener("scroll", () => {
+    document.getElementById("navbar").classList.toggle("scrolled", window.scrollY > 60);
+  });
+
+  // Mobile menu
+  function toggleMobileMenu() {
+    const m = document.getElementById("mobile-menu");
+    m.style.display = m.style.display === "block" ? "none" : "block";
+  }
+
+  // Materials filter
+  function filterMaterials(dept, btn) {
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    document.querySelectorAll(".material-card").forEach(card => {
+      card.style.display = (dept === "all" || card.dataset.dept === dept) ? "block" : "none";
+    });
+  }
+
+  // Order modal
+  function openOrder(name) {
+    document.getElementById("order-item-name").textContent = "Ordering: " + name;
+    document.getElementById("order-modal").classList.add("open");
+    document.getElementById("order-success").style.display = "none";
+  }
+
+  function closeOrder() {
+    document.getElementById("order-modal").classList.remove("open");
+  }
+
+  document.getElementById("order-modal").addEventListener("click", function(e) {
+    if (e.target === this) closeOrder();
+  });
+
+  function submitOrder() {
+    const name   = document.getElementById("om-name").value.trim();
+    const school = document.getElementById("om-school").value.trim();
+    const phone  = document.getElementById("om-phone").value.trim();
+    if (!name || !school || !phone) {
+      alert("Please fill in your name, school, and phone number.");
+      return;
+    }
+    // In production: send to Firebase / email API / WhatsApp
+    document.getElementById("order-success").style.display = "block";
+    setTimeout(closeOrder, 3000);
+  }
+
+  // Contact form
+  function submitContact() {
+    const name    = document.getElementById("cf-name").value.trim();
+    const email   = document.getElementById("cf-email").value.trim();
+    const message = document.getElementById("cf-message").value.trim();
+    if (!name || !email || !message) {
+      alert("Please fill in your name, email, and message.");
+      return;
+    }
+    // In production: send to Firebase / EmailJS / Formspree
+    document.getElementById("form-success").style.display = "block";
+    ["cf-name","cf-school","cf-email","cf-phone","cf-message"].forEach(id => {
+      document.getElementById(id).value = "";
+    });
+  }
+
+  // Workshop notify
+  function registerNotify() {
+    const email = document.getElementById("notify-email").value.trim();
+    if (!email || !email.includes("@")) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+    document.getElementById("notify-email").value = "";
+    document.getElementById("notify-success").style.display = "block";
+  }
+</script>
+</body>
+</html>

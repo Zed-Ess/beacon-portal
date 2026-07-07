@@ -1,27 +1,27 @@
 .page { width: 100%; }
 
 .hero {
-  background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
-  padding: 4rem 1.5rem 3.5rem;
+  background: linear-gradient(135deg, #162849 0%, #2a4d8f 100%);
+  padding: 7rem 1.5rem 4rem;
   text-align: center;
 }
 
 .heroInner { max-width: 600px; margin: 0 auto; }
 .hero h1 { font-size: clamp(1.75rem,4vw,2.5rem); font-weight: 800; color: #fff; margin: 0 0 0.75rem; }
-.hero p { color: #9ca3af; font-size: 0.95rem; line-height: 1.6; margin: 0 0 1.75rem; }
+.hero p { color: rgba(255,255,255,0.65); font-size: 0.95rem; line-height: 1.6; margin: 0 0 1.75rem; }
 
 .heroBtn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  background: #e85d26;
-  color: #fff;
+  background: #C9A227;
+  color: #1F3864;
   border-radius: 8px;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.9rem;
   transition: background 0.15s;
 }
-.heroBtn:hover { background: #c94d1e; }
+.heroBtn:hover { background: #e8b830; }
 
 .section { padding: 4rem 1.5rem; }
 .inner { max-width: 1000px; margin: 0 auto; }
@@ -63,8 +63,8 @@
 .stepNum {
   width: 34px;
   height: 34px;
-  background: #e85d26;
-  color: #fff;
+  background: #C9A227;
+  color: #1F3864;
   border-radius: 50%;
   font-size: 0.9rem;
   font-weight: 700;
@@ -81,7 +81,7 @@
 
 .btnPrimary {
   padding: 0.65rem 1.4rem;
-  background: #e85d26;
+  background: #1F3864;
   color: #fff;
   border-radius: 8px;
   text-decoration: none;
@@ -89,7 +89,7 @@
   font-size: 0.875rem;
   transition: background 0.15s;
 }
-.btnPrimary:hover { background: #c94d1e; }
+.btnPrimary:hover { background: #162849; }
 
 .btnOutline {
   padding: 0.65rem 1.4rem;
@@ -124,7 +124,7 @@
   justify-content: space-between;
 }
 
-.faqQ::after { content: "+"; font-size: 1.1rem; color: #e85d26; }
+.faqQ::after { content: "+"; font-size: 1.1rem; color: #C9A227; }
 details[open] .faqQ::after { content: "−"; }
 
 .faqA {

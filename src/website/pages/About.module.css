@@ -1,8 +1,8 @@
 .page { width: 100%; }
 
 .hero {
-  background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
-  padding: 4rem 1.5rem 3.5rem;
+  background: linear-gradient(135deg, #162849 0%, #2a4d8f 100%);
+  padding: 7rem 1.5rem 4rem;
   text-align: center;
 }
 
@@ -41,7 +41,7 @@
   text-align: center;
 }
 
-.statVal { display: block; font-size: 2rem; font-weight: 800; color: #e85d26; }
+.statVal { display: block; font-size: 2rem; font-weight: 800; color: #C9A227; }
 .statLbl { display: block; font-size: 0.78rem; color: #6b7280; margin-top: 2px; }
 
 .valuesSection { background: #f3f4f6; padding: 4rem 1.5rem; }
@@ -85,8 +85,8 @@
 .stageNum {
   width: 26px;
   height: 26px;
-  background: #e85d26;
-  color: #fff;
+  background: #C9A227;
+  color: #1F3864;
   border-radius: 50%;
   font-size: 0.75rem;
   font-weight: 700;
@@ -119,8 +119,8 @@
 .teamAvatar {
   width: 44px;
   height: 44px;
-  background: #e85d26;
-  color: #fff;
+  background: #1F3864;
+  color: #C9A227;
   border-radius: 50%;
   font-size: 1.1rem;
   font-weight: 700;
