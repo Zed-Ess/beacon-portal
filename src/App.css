@@ -11,7 +11,6 @@ html, body, #root {
   color: #374151;
   background: #f9fafb;
 }
-
 /* App layout */
 .appLayout {
   display: flex;

@@ -4,7 +4,22 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Beacon Partner Portal</title>
+    <title>Beacon Educational Consult</title>
+    <script>
+      // GitHub Pages SPA redirect handler
+      (function() {
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+        }
+        // Handle ?p= redirect from 404.html
+        var p = new URLSearchParams(window.location.search).get('p');
+        if (p) {
+          history.replaceState(null, null, p || '/');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

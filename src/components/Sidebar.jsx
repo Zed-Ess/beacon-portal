@@ -11,6 +11,8 @@ const NAV = [
   { id: "pipeline",    label: "Pipeline",    icon: "🔄" },
   { id: "members",     label: "Members",     icon: "👥" },
   { id: "documents",   label: "Documents",   icon: "📁" },
+  { id: "agreement",   label: "Agreement",   icon: "📜" },
+  { id: "enquiries",   label: "Enquiries",   icon: "📬" },
 ];
 
 export default function Sidebar({ active, onNav, mobileOpen, onClose }) {

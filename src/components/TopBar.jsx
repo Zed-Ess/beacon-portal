@@ -8,6 +8,8 @@ const PAGE_TITLES = {
   pipeline:    "Production Pipeline",
   members:     "Members",
   documents:   "Documents",
+  agreement:   "Partnership Agreement",
+  enquiries:   "Enquiries",
 };
 
 export default function TopBar({ page, onMenuClick }) {
