@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   collection, addDoc, onSnapshot, doc,
-  query, orderBy, serverTimestamp, updateDoc, arrayUnion, increment
+  query, orderBy, serverTimestamp, updateDoc, arrayUnion
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { useAuth } from "../context/AuthContext";
@@ -107,9 +107,11 @@ export default function Polls() {
       <div className={styles.list}>
         {polls.length === 0 && <p className={styles.empty}>No polls yet.</p>}
         {polls.map((poll) => {
-          const voted     = poll.voters?.includes(profile?.id);
-          const total     = poll.options?.reduce((s, o) => s + (o.votes || 0), 0) || 0;
-          const showResults = voted || poll.closed;
+          const isPrivileged = profile?.role === "founder" || profile?.role === "hod";
+          const voted        = poll.voters?.includes(profile?.id);
+          const total        = poll.options?.reduce((s, o) => s + (o.votes || 0), 0) || 0;
+          // Founders/HoDs always see results; others only after voting or when poll is closed
+          const showResults  = isPrivileged || voted || poll.closed;
 
           return (
             <div key={poll.id} className={`${styles.card} ${poll.closed ? styles.closed : ""}`}>

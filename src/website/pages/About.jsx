@@ -1,7 +1,7 @@
 import styles from "./About.module.css";
 
 const TEAM = [
-  { name: "Founder / Coordinator", role: "English Language · Computing · Integrated Science", initial: "F" },
+  { name: "S.K. Boateng", role: "Founder / Coordinator · Lead Editor · Lead Author . Production Lead", initial: "F" },
 ];
 
 const VALUES = [

@@ -54,7 +54,7 @@ export default function Contact() {
             <span>📧</span>
             <div>
               <h3>Email</h3>
-              <a href="mailto:info@beaconeducationalconsult.com">info@beaconeducationalconsult.com</a>
+              <a href="mailto:zedesssystems@gmail.com">zedesssystems@gmail.com</a>
             </div>
           </div>
           <div className={styles.infoCard}>

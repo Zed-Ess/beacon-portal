@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  collection, query, onSnapshot, doc, updateDoc, orderBy
-} from "firebase/firestore";
+import { collection, query, onSnapshot, doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useAuth } from "../context/AuthContext";
 import styles from "./Members.module.css";
@@ -11,13 +9,29 @@ const ROLES = ["member", "hod", "founder"];
 export default function Members() {
   const { profile } = useAuth();
   const [members, setMembers] = useState([]);
-  const [tab, setTab]         = useState("active"); // active | pending
+  const [loading, setLoading] = useState(true);
+  const [error, setError]     = useState("");
+  const [tab, setTab]         = useState("active");
 
   useEffect(() => {
-    const q = query(collection(db, "users"), orderBy("name"));
-    return onSnapshot(q, (snap) => {
-      setMembers(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
-    });
+    // No orderBy to avoid Firestore index/permission issues with missing fields
+    const q = query(collection(db, "users"));
+    const unsub = onSnapshot(
+      q,
+      (snap) => {
+        const all = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+        all.sort((a, b) => (a.name ?? "").localeCompare(b.name ?? ""));
+        setMembers(all);
+        setLoading(false);
+        setError("");
+      },
+      (err) => {
+        console.error("Members snapshot error:", err);
+        setError("Could not load members. Check Firestore rules.");
+        setLoading(false);
+      }
+    );
+    return unsub;
   }, []);
 
   const active  = members.filter((m) => m.status === "active");
@@ -43,17 +57,29 @@ export default function Members() {
     <div className={styles.page}>
       <div className={styles.toolbar}>
         <div className={styles.tabs}>
-          <button className={tab === "active" ? styles.activeTab : ""} onClick={() => setTab("active")}>
+          <button
+            className={tab === "active" ? styles.activeTab : ""}
+            onClick={() => setTab("active")}
+          >
             Active ({active.length})
           </button>
-          <button className={tab === "pending" ? styles.activeTab : ""} onClick={() => setTab("pending")}>
+          <button
+            className={tab === "pending" ? styles.activeTab : ""}
+            onClick={() => setTab("pending")}
+          >
             Pending ({pending.length})
             {pending.length > 0 && <span className={styles.dot} />}
           </button>
         </div>
       </div>
 
-      {tab === "pending" && pending.length === 0 && (
+      {loading && <p className={styles.empty}>Loading members…</p>}
+      {error   && <p className={styles.errorMsg}>{error}</p>}
+
+      {!loading && !error && tab === "active"  && active.length  === 0 && (
+        <p className={styles.empty}>No active members yet.</p>
+      )}
+      {!loading && !error && tab === "pending" && pending.length === 0 && (
         <p className={styles.empty}>No pending applications.</p>
       )}
 
@@ -64,7 +90,7 @@ export default function Members() {
               {m.name?.[0]?.toUpperCase() ?? "?"}
             </div>
             <div className={styles.info}>
-              <span className={styles.memberName}>{m.name}</span>
+              <span className={styles.memberName}>{m.name ?? "(no name)"}</span>
               <span className={styles.email}>{m.email}</span>
               <span className={styles.dept}>{m.department}</span>
               {m.subjects?.length > 0 && (
@@ -80,7 +106,7 @@ export default function Members() {
                   {isFounder && m.id !== profile.id && (
                     <select
                       className={styles.roleSelect}
-                      value={m.role}
+                      value={m.role ?? "member"}
                       onChange={(e) => changeRole(m.id, e.target.value)}
                       aria-label={`Change role for ${m.name}`}
                     >
