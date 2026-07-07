@@ -2,13 +2,15 @@ import { useState } from "react";
 import { useAuth } from "./context/AuthContext";
 import AuthPage    from "./pages/AuthPage";
 import PendingPage from "./pages/PendingPage";
-import Sidebar     from "./components/Sidebar";
-import TopBar      from "./components/TopBar";
+import Sidebar       from "./components/Sidebar";
+import TopBar        from "./components/TopBar";
+import ErrorBoundary from "./components/ErrorBoundary";
 import Dashboard   from "./modules/Dashboard";
 import Noticeboard from "./modules/Noticeboard";
 import Meetings    from "./modules/Meetings";
 import Polls       from "./modules/Polls";
 import Pipeline    from "./modules/Pipeline";
+import Builder     from "./modules/Builder";
 import Members     from "./modules/Members";
 import Documents   from "./modules/Documents";
 import Agreement   from "./modules/Agreement";
@@ -49,6 +51,7 @@ export default function PortalShell() {
     meetings:    <Meetings />,
     polls:       <Polls />,
     pipeline:    <Pipeline />,
+    builder:     <Builder />,
     members:     <Members />,
     documents:   <Documents />,
     agreement:   <Agreement />,
@@ -66,7 +69,9 @@ export default function PortalShell() {
       <div className="mainArea">
         <TopBar page={page} onMenuClick={() => setMenu(true)} />
         <main className="content">
-          {PAGE_MAP[page] ?? <Dashboard />}
+          <ErrorBoundary resetKey={page}>
+            {PAGE_MAP[page] ?? <Dashboard />}
+          </ErrorBoundary>
         </main>
       </div>
     </div>

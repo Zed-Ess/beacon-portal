@@ -87,36 +87,20 @@ export const storage = getStorage(app);
 
 ### Step 6: Set Firestore security rules
 
-In the Firebase Console, go to **Firestore → Rules** and paste:
+In the Firebase Console, go to **Firestore → Rules**, paste the contents of
+**`firestore.rules`** (in the root of this project), and click **Publish**.
 
-```
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
+These rules require an account to be **approved (status = active)** before it
+can read or write any portal data — a pending or rejected account can only see
+its own profile. Only the Founder can approve members or change roles, and
+members cannot promote or approve themselves.
 
-    // Users can read all user profiles; only write their own
-    match /users/{uid} {
-      allow read: if request.auth != null;
-      allow write: if request.auth.uid == uid;
-    }
+### Step 6b: Enable Storage and set its rules
 
-    // Founder can update any user (for role assignment and approval)
-    match /users/{uid} {
-      allow update: if request.auth != null &&
-        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'founder';
-    }
+File uploads (Documents module) use Firebase Storage:
 
-    // Authenticated partners can read and write notices, meetings, polls, pipeline, documents
-    match /notices/{id}    { allow read, write: if request.auth != null; }
-    match /meetings/{id}   { allow read, write: if request.auth != null; }
-    match /polls/{id}      { allow read, write: if request.auth != null; }
-    match /pipeline/{id}   { allow read, write: if request.auth != null; }
-    match /documents/{id}  { allow read, write: if request.auth != null; }
-  }
-}
-```
-
-Click **Publish**.
+1. Go to **Build → Storage** and click **Get started**
+2. Go to **Storage → Rules**, paste the contents of **`storage.rules`**, and click **Publish**
 
 ### Step 7: Deploy to GitHub Pages
 

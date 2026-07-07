@@ -1,71 +1,125 @@
 import { useEffect, useState } from "react";
 import {
   collection, addDoc, onSnapshot, doc,
-  query, orderBy, serverTimestamp, updateDoc, deleteDoc
+  query, orderBy, serverTimestamp, updateDoc, deleteDoc, arrayUnion, where
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { useAuth } from "../context/AuthContext";
+import { STAGES, MATERIAL_TYPES, DEPARTMENTS, SUBJECTS } from "../constants";
 import styles from "./Pipeline.module.css";
-
-const STAGES = [
-  "1 – Concept",
-  "2 – Outline",
-  "3 – Draft",
-  "4 – Review",
-  "5 – Revision",
-  "6 – Design",
-  "7 – Proofreading",
-  "8 – Final Approval",
-  "9 – Published",
-];
-
-const TYPES = ["Textbook", "Workbook", "Assessment", "Manual", "Guide", "Other"];
-const DEPTS = ["Mathematics","English","Science","Social Studies","ICT","Creative Arts","French"];
 
 export default function Pipeline() {
   const { profile } = useAuth();
-  const [items, setItems]   = useState([]);
-  const [showForm, setShow] = useState(false);
-  const [stageFilter, setSF] = useState("All");
-  const [form, setForm]     = useState({
-    title: "", type: "Textbook", author: "", department: "Mathematics",
-    stage: STAGES[0], dueDate: "", notes: ""
-  });
-  const [saving, setSaving] = useState(false);
+  const [items, setItems]     = useState([]);
+  const [members, setMembers] = useState([]);
+  const [showForm, setShow]   = useState(false);
+  const [stageFilter, setSF]  = useState("All");
+  const [mineOnly, setMine]   = useState(false);
+  const [openComments, setOpenComments] = useState(null); // item id
+  const [commentText, setCommentText]   = useState("");
+  const [error, setError]     = useState("");
+  const [form, setForm]       = useState(blankForm());
+  const [saving, setSaving]   = useState(false);
+
+  function blankForm() {
+    return {
+      title: "", type: MATERIAL_TYPES[0],
+      department: "", subject: SUBJECTS[0],
+      authorId: "", reviewerId: "",
+      stage: STAGES[0], dueDate: "", notes: "",
+    };
+  }
 
   useEffect(() => {
     const q = query(collection(db, "pipeline"), orderBy("createdAt", "desc"));
-    return onSnapshot(q, (snap) => {
-      setItems(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
-    });
+    const unsub = onSnapshot(q,
+      (snap) => {
+        setItems(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
+        setError("");
+      },
+      (err) => {
+        console.error("Pipeline snapshot error:", err);
+        setError("Could not load the pipeline. Check your connection or permissions.");
+      }
+    );
+    return unsub;
   }, []);
 
-  const filtered = stageFilter === "All"
-    ? items
-    : items.filter((i) => i.stage === stageFilter);
+  // Active members for author / reviewer selection
+  useEffect(() => {
+    const q = query(collection(db, "users"), where("status", "==", "active"));
+    return onSnapshot(q, (snap) => {
+      const all = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+      all.sort((a, b) => (a.name ?? "").localeCompare(b.name ?? ""));
+      setMembers(all);
+    }, () => {});
+  }, []);
+
+  const isManager = profile?.role === "founder" || profile?.role === "hod";
+
+  const filtered = items.filter((i) => {
+    if (stageFilter !== "All" && i.stage !== stageFilter) return false;
+    if (mineOnly && i.authorId !== profile?.id && i.reviewerId !== profile?.id) return false;
+    return true;
+  });
 
   async function handleSubmit(e) {
     e.preventDefault();
     setSaving(true);
-    await addDoc(collection(db, "pipeline"), {
-      ...form,
-      createdBy: profile.name,
-      createdAt: serverTimestamp(),
-    });
-    setForm({ title: "", type: "Textbook", author: "", department: "Mathematics", stage: STAGES[0], dueDate: "", notes: "" });
-    setShow(false);
+    try {
+      const author   = isManager && form.authorId
+        ? members.find((m) => m.id === form.authorId)
+        : profile;
+      const reviewer = members.find((m) => m.id === form.reviewerId);
+      await addDoc(collection(db, "pipeline"), {
+        title:        form.title,
+        type:         form.type,
+        department:   form.department || profile.department,
+        subject:      form.subject,
+        stage:        isManager ? form.stage : STAGES[0],
+        dueDate:      form.dueDate,
+        notes:        form.notes,
+        authorId:     author?.id ?? profile.id,
+        author:       author?.name ?? profile.name,
+        reviewerId:   reviewer?.id ?? "",
+        reviewer:     reviewer?.name ?? "",
+        comments:     [],
+        createdBy:    profile.name,
+        createdAt:    serverTimestamp(),
+      });
+      setForm(blankForm());
+      setShow(false);
+    } catch (err) {
+      console.error(err);
+      setError("Could not save the item. Please try again.");
+    }
     setSaving(false);
   }
 
-  async function advanceStage(item) {
+  async function moveStage(item, dir) {
     const idx = STAGES.indexOf(item.stage);
-    if (idx === -1 || idx === STAGES.length - 1) return;
-    await updateDoc(doc(db, "pipeline", item.id), { stage: STAGES[idx + 1] });
+    const next = idx + dir;
+    if (idx === -1 || next < 0 || next >= STAGES.length) return;
+    await updateDoc(doc(db, "pipeline", item.id), { stage: STAGES[next] });
   }
 
   async function handleDelete(id) {
     if (!window.confirm("Delete this pipeline item?")) return;
     await deleteDoc(doc(db, "pipeline", id));
+  }
+
+  async function addComment(item) {
+    const text = commentText.trim();
+    if (!text) return;
+    await updateDoc(doc(db, "pipeline", item.id), {
+      comments: arrayUnion({
+        text,
+        byId: profile.id,
+        by:   profile.name,
+        at:   Date.now(),
+      }),
+    });
+    setCommentText("");
   }
 
   const stageColor = (stage) => {
@@ -86,37 +140,70 @@ export default function Pipeline() {
               {s.split("–")[0].trim()}
             </button>
           ))}
-        </div>
-        {(profile?.role === "founder" || profile?.role === "hod") && (
-          <button className={styles.addBtn} onClick={() => setShow((v) => !v)}>
-            {showForm ? "Cancel" : "+ Add Item"}
+          <button
+            className={`${styles.sf} ${mineOnly ? styles.activeSF : ""}`}
+            onClick={() => setMine((v) => !v)}
+            title="Items where you are the author or reviewer"
+          >
+            ★ My Items
           </button>
-        )}
+        </div>
+        <button className={styles.addBtn} onClick={() => setShow((v) => !v)}>
+          {showForm ? "Cancel" : "+ Add Item"}
+        </button>
       </div>
+
+      {error && <p className={styles.errorMsg}>{error}</p>}
 
       {showForm && (
         <form className={styles.form} onSubmit={handleSubmit}>
           <h3>New Pipeline Item</h3>
-          <label>Title<input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} required /></label>
+          <label>Title<input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} required placeholder="e.g. Basic 4 English — Term 2 Scheme of Work" /></label>
           <div className={styles.row}>
             <label>Type
               <select value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })}>
-                {TYPES.map((t) => <option key={t}>{t}</option>)}
+                {MATERIAL_TYPES.map((t) => <option key={t}>{t}</option>)}
               </select>
             </label>
             <label>Department
-              <select value={form.department} onChange={(e) => setForm({ ...form, department: e.target.value })}>
-                {DEPTS.map((d) => <option key={d}>{d}</option>)}
+              <select value={form.department || profile?.department} onChange={(e) => setForm({ ...form, department: e.target.value })}>
+                {DEPARTMENTS.map((d) => <option key={d}>{d}</option>)}
+              </select>
+            </label>
+            <label>Subject
+              <select value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })}>
+                {SUBJECTS.map((s) => <option key={s}>{s}</option>)}
               </select>
             </label>
           </div>
-          <label>Lead Author<input value={form.author} onChange={(e) => setForm({ ...form, author: e.target.value })} /></label>
           <div className={styles.row}>
-            <label>Stage
-              <select value={form.stage} onChange={(e) => setForm({ ...form, stage: e.target.value })}>
-                {STAGES.map((s) => <option key={s}>{s}</option>)}
+            {isManager ? (
+              <label>Lead Author
+                <select value={form.authorId} onChange={(e) => setForm({ ...form, authorId: e.target.value })}>
+                  <option value="">Me ({profile?.name})</option>
+                  {members.filter((m) => m.id !== profile?.id).map((m) => (
+                    <option key={m.id} value={m.id}>{m.name}</option>
+                  ))}
+                </select>
+              </label>
+            ) : (
+              <label>Lead Author<input value={profile?.name ?? ""} disabled /></label>
+            )}
+            <label>Reviewer <span className={styles.optional}>(optional)</span>
+              <select value={form.reviewerId} onChange={(e) => setForm({ ...form, reviewerId: e.target.value })}>
+                <option value="">— None yet —</option>
+                {members.map((m) => <option key={m.id} value={m.id}>{m.name}</option>)}
               </select>
             </label>
+          </div>
+          <div className={styles.row}>
+            {isManager && (
+              <label>Stage
+                <select value={form.stage} onChange={(e) => setForm({ ...form, stage: e.target.value })}>
+                  {STAGES.map((s) => <option key={s}>{s}</option>)}
+                </select>
+              </label>
+            )}
             <label>Due Date<input type="date" value={form.dueDate} onChange={(e) => setForm({ ...form, dueDate: e.target.value })} /></label>
           </div>
           <label>Notes<textarea rows={2} value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} /></label>
@@ -129,11 +216,13 @@ export default function Pipeline() {
       <div className={styles.count}>{filtered.length} item{filtered.length !== 1 ? "s" : ""}</div>
 
       <div className={styles.list}>
-        {filtered.length === 0 && <p className={styles.empty}>No items in this stage.</p>}
+        {filtered.length === 0 && <p className={styles.empty}>No items match this view.</p>}
         {filtered.map((item) => {
-          const color = stageColor(item.stage);
+          const color    = stageColor(item.stage);
           const stageIdx = STAGES.indexOf(item.stage);
-          const canAdvance = profile?.role === "founder" || profile?.role === "hod";
+          const canMove  = isManager || item.reviewerId === profile?.id;
+          const comments = item.comments ?? [];
+          const isOpen   = openComments === item.id;
           return (
             <div key={item.id} className={styles.card}>
               <div className={styles.stageTag} style={{ background: color + "22", color }}>
@@ -148,19 +237,60 @@ export default function Pipeline() {
                 </div>
                 <div className={styles.meta}>
                   <span>📚 {item.type}</span>
+                  {item.subject && <span>📖 {item.subject}</span>}
                   <span>🏫 {item.department}</span>
                   {item.author && <span>✍️ {item.author}</span>}
+                  {item.reviewer && <span>🔍 Reviewer: {item.reviewer}</span>}
                   {item.dueDate && <span>📅 Due {formatDate(item.dueDate)}</span>}
                 </div>
                 {item.notes && <p className={styles.notes}>{item.notes}</p>}
                 <div className={styles.progress}>
                   <div className={styles.progressBar} style={{ width: `${((stageIdx + 1) / STAGES.length) * 100}%`, background: color }} />
                 </div>
-              </div>
-              {canAdvance && stageIdx < STAGES.length - 1 && (
-                <button className={styles.advBtn} onClick={() => advanceStage(item)} title="Advance to next stage">
-                  →
+
+                <button
+                  className={styles.commentToggle}
+                  onClick={() => { setOpenComments(isOpen ? null : item.id); setCommentText(""); }}
+                >
+                  💬 {comments.length} comment{comments.length !== 1 ? "s" : ""}
                 </button>
+
+                {isOpen && (
+                  <div className={styles.comments}>
+                    {comments.length === 0 && <p className={styles.empty}>No feedback yet.</p>}
+                    {[...comments].sort((a, b) => a.at - b.at).map((c, i) => (
+                      <div key={i} className={styles.comment}>
+                        <span className={styles.commentBy}>{c.by}</span>
+                        <span className={styles.commentAt}>{new Date(c.at).toLocaleDateString("en-GB", { day: "numeric", month: "short" })}</span>
+                        <p>{c.text}</p>
+                      </div>
+                    ))}
+                    <div className={styles.commentInput}>
+                      <input
+                        value={commentText}
+                        onChange={(e) => setCommentText(e.target.value)}
+                        placeholder="Add feedback…"
+                        onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); addComment(item); } }}
+                      />
+                      <button onClick={() => addComment(item)}>Post</button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {canMove && (
+                <div className={styles.moveBtns}>
+                  {stageIdx > 0 && (
+                    <button className={styles.backBtn} onClick={() => moveStage(item, -1)} title="Send back a stage (request changes)">
+                      ←
+                    </button>
+                  )}
+                  {stageIdx < STAGES.length - 1 && (
+                    <button className={styles.advBtn} onClick={() => moveStage(item, 1)} title="Advance to next stage">
+                      →
+                    </button>
+                  )}
+                </div>
               )}
             </div>
           );

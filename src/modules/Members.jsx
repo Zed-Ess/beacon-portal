@@ -93,8 +93,10 @@ export default function Members() {
               <span className={styles.memberName}>{m.name ?? "(no name)"}</span>
               <span className={styles.email}>{m.email}</span>
               <span className={styles.dept}>{m.department}</span>
-              {m.subjects?.length > 0 && (
-                <span className={styles.subjects}>{m.subjects.join(", ")}</span>
+              {m.subjects != null && m.subjects.length > 0 && (
+                <span className={styles.subjects}>
+                  {Array.isArray(m.subjects) ? m.subjects.join(", ") : m.subjects}
+                </span>
               )}
             </div>
             <div className={styles.actions}>

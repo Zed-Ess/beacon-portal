@@ -1,0 +1,233 @@
+.page { padding: 1.5rem; max-width: 900px; }
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.tabs { display: flex; gap: 0.4rem; }
+
+.tabs button {
+  padding: 4px 14px;
+  border-radius: 999px;
+  border: 1.5px solid #e5e7eb;
+  background: #fff;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: #374151;
+}
+
+.tabs .activeTab {
+  background: #e85d26;
+  border-color: #e85d26;
+  color: #fff;
+}
+
+.newBtns { display: flex; gap: 0.5rem; }
+
+.addBtn {
+  padding: 0.5rem 1rem;
+  background: #e85d26;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.addBtn:hover { background: #c94d1e; }
+
+.empty { color: #9ca3af; font-size: 0.875rem; }
+
+.errorMsg {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.list { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.kindTag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #e85d26;
+  background: #fdf0e9;
+  padding: 4px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.cardBody { flex: 1; min-width: 200px; }
+.cardBody h4 { margin: 0 0 0.25rem; font-size: 0.95rem; color: #111827; }
+
+.meta {
+  display: flex;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: #6b7280;
+  flex-wrap: wrap;
+}
+
+.cardActions { display: flex; gap: 0.4rem; }
+
+.cardActions button {
+  padding: 5px 10px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 0.78rem;
+  cursor: pointer;
+  color: #374151;
+}
+
+.cardActions button:hover { border-color: #e85d26; color: #e85d26; }
+
+.delBtn {
+  background: transparent;
+  border: none;
+  color: #d1d5db;
+  cursor: pointer;
+  font-size: 0.78rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.delBtn:hover { color: #dc2626 !important; background: #fee2e2; border-color: #dc2626 !important; }
+
+/* ---- edit view ---- */
+
+.editHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.editHead h3 { margin: 0; font-size: 1.05rem; color: #1a1a2e; }
+
+.editActions { display: flex; gap: 0.5rem; }
+
+.cancelBtn {
+  padding: 0.5rem 1rem;
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.saveBtn {
+  padding: 0.5rem 1.25rem;
+  background: #1a1a2e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.saveBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.form {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.form input,
+.form select,
+.form textarea {
+  padding: 0.5rem 0.75rem;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  outline: none;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.form input:focus,
+.form select:focus,
+.form textarea:focus {
+  border-color: #e85d26;
+  box-shadow: 0 0 0 3px rgba(232,93,38,0.1);
+}
+
+.row { display: flex; gap: 1rem; flex-wrap: wrap; }
+.row label { flex: 1; min-width: 140px; }
+
+.sectionTitle {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  color: #e85d26;
+  border-bottom: 1px solid #f3f4f6;
+  padding-bottom: 0.4rem;
+}
+
+.weekBlock {
+  border: 1px dashed #e5e7eb;
+  border-radius: 10px;
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  background: #fafafa;
+}
+
+.weekHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #1a1a2e;
+}
+
+.addWeekBtn {
+  align-self: flex-start;
+  padding: 0.45rem 1rem;
+  background: #fff;
+  border: 1.5px dashed #e85d26;
+  color: #e85d26;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.addWeekBtn:hover { background: #fdf0e9; }

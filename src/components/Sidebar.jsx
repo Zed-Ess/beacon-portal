@@ -9,6 +9,7 @@ const NAV = [
   { id: "meetings",    label: "Meetings",    icon: "📅" },
   { id: "polls",       label: "Polls",       icon: "🗳️" },
   { id: "pipeline",    label: "Pipeline",    icon: "🔄" },
+  { id: "builder",     label: "Materials",   icon: "📖" },
   { id: "members",     label: "Members",     icon: "👥" },
   { id: "documents",   label: "Documents",   icon: "📁" },
   { id: "agreement",   label: "Agreement",   icon: "📜" },

@@ -132,3 +132,12 @@
   color: #9ca3af;
   font-size: 0.75rem;
 }
+
+.errorMsg {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}

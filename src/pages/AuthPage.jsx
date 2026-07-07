@@ -5,33 +5,8 @@ import {
 } from "firebase/auth";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { auth, db } from "../firebase";
+import { DEPARTMENTS, SUBJECTS } from "../constants";
 import styles from "./AuthPage.module.css";
-
-const DEPARTMENTS = [
-  "Pre-School",
-  "Lower Primary",
-  "Upper Primary",
-  "JHS",
-  "Upper Primary & JHS",
-];
-
-const SUBJECTS = [
-  "Ghanaian Language", 
-  "English Language", 
-  "French Language", 
-  "Integrated Science", 
-  "R.M.E", 
-  "Social Studies",
-  "History",
-  "Creative Arts",
-  "Career Technology",
-  "Computing",
-  "Numeracy",
-  "⁠Literacy",
-  "⁠Science",
-  "⁠Creativity",
-  "⁠Our World our People",
-]
 
 export default function AuthPage() {
   const [mode, setMode]       = useState("login"); // "login" | "register"
@@ -65,8 +40,7 @@ export default function AuthPage() {
         name,
         email,
         department: dept,
-        // subjects: subjects.split(",").map((s) => s.trim()).filter(Boolean),
-        subjects: subjects,
+        subjects: [subjects], // stored as array for consistency
         role: "member",
         status: "pending",
         createdAt: serverTimestamp(),
@@ -169,7 +143,7 @@ export default function AuthPage() {
               </select>
             </label>
             <label>
-              Subjects <span className={styles.hint}>(comma-separated)</span>
+              Subjects
               {/* <input
                 type="text"
                 value={subjects}

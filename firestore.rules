@@ -1,0 +1,51 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function me() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    // Only APPROVED members may use portal data — pending/rejected accounts
+    // are authenticated but must not read or write anything except their own profile.
+    function isActive() {
+      return signedIn() && me().status == 'active';
+    }
+
+    function isFounder() {
+      return isActive() && me().role == 'founder';
+    }
+
+    match /users/{uid} {
+      // Any signed-in user may read profiles (needed to check own status,
+      // and for the member directory / reviewer pickers).
+      allow read: if signedIn();
+
+      // Registration: create your own profile, but you cannot self-approve
+      // or self-promote.
+      allow create: if request.auth.uid == uid
+        && request.resource.data.role == 'member'
+        && request.resource.data.status == 'pending';
+
+      // Profile edits: you may update your own doc but NOT your role/status.
+      allow update: if (request.auth.uid == uid
+          && request.resource.data.role == resource.data.role
+          && request.resource.data.status == resource.data.status)
+        // Founder can approve/reject and assign roles.
+        || isFounder();
+
+      allow delete: if isFounder();
+    }
+
+    match /notices/{id}   { allow read, write: if isActive(); }
+    match /meetings/{id}  { allow read, write: if isActive(); }
+    match /polls/{id}     { allow read, write: if isActive(); }
+    match /pipeline/{id}  { allow read, write: if isActive(); }
+    match /documents/{id} { allow read, write: if isActive(); }
+    match /materials/{id} { allow read, write: if isActive(); }
+  }
+}
