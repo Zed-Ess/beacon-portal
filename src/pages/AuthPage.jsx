@@ -65,7 +65,8 @@ export default function AuthPage() {
         name,
         email,
         department: dept,
-        subjects: subjects.split(",").map((s) => s.trim()).filter(Boolean),
+        // subjects: subjects.split(",").map((s) => s.trim()).filter(Boolean),
+        subjects: subjects,
         role: "member",
         status: "pending",
         createdAt: serverTimestamp(),
@@ -169,12 +170,18 @@ export default function AuthPage() {
             </label>
             <label>
               Subjects <span className={styles.hint}>(comma-separated)</span>
-              <input
+              {/* <input
                 type="text"
                 value={subjects}
                 onChange={(e) => setSubj(e.target.value)}
                 placeholder="e.g. Algebra, Statistics"
-              />
+              /> */}
+              
+              <select value={subjects} onChange={(e) => setSubj(e.target.value)}>
+                {SUBJECTS.map((d) => (
+                  <option key={d}>{d}</option>
+                ))}
+              </select>
             </label>
             {error && <p className={styles.error}>{error}</p>}
             <button type="submit" className={styles.submit} disabled={busy}>

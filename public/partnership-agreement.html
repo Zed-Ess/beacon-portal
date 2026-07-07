@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partnership Agreement — Beacon Educational Consult</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #374151;
+      background: #f9fafb;
+    }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Header */
+    .doc-header {
+      text-align: center;
+      padding: 2.5rem 2rem 2rem;
+      background: #1a1a2e;
+      color: #fff;
+      border-radius: 12px;
+      margin-bottom: 2.5rem;
+    }
+
+    .doc-header .lamp { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; }
+
+    .doc-header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin: 0 0 0.25rem;
+      color: #fff;
+    }
+
+    .doc-header .subtitle {
+      font-size: 0.95rem;
+      color: #9ca3af;
+      margin: 0;
+    }
+
+    /* Article blocks */
+    .article {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .article-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin: 0 0 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #e85d26;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .article-num {
+      background: #e85d26;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin: 1.25rem 0 0.4rem;
+    }
+
+    h3:first-child { margin-top: 0; }
+
+    p { margin: 0 0 0.75rem; }
+    p:last-child { margin-bottom: 0; }
+
+    ul, ol {
+      margin: 0 0 0.75rem 1.25rem;
+      padding: 0;
+    }
+
+    li { margin-bottom: 0.3rem; }
+
+    /* Tables */
+    .tbl-wrap { overflow-x: auto; margin: 0.75rem 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+
+    th {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 0.6rem 0.85rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    td {
+      padding: 0.6rem 0.85rem;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: #f9fafb; }
+
+    /* Placeholder highlight */
+    .placeholder {
+      background: #fef3c7;
+      color: #92400e;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-style: italic;
+      font-size: 0.875em;
+    }
+
+    /* Signature section */
+    .signatures {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .signatures h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin: 0 0 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #e85d26;
+    }
+
+    .sig-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .sig-entry { padding: 0.5rem 0; }
+
+    .sig-line {
+      border-bottom: 1px solid #374151;
+      margin: 1.5rem 0 0.3rem;
+    }
+
+    .sig-label {
+      font-size: 0.78rem;
+      color: #9ca3af;
+    }
+
+    /* Date line */
+    .date-line {
+      font-size: 0.9rem;
+      margin-bottom: 1.25rem;
+      color: #374151;
+    }
+
+    @media (max-width: 600px) {
+      .sig-block { grid-template-columns: 1fr; gap: 1rem; }
+      .article { padding: 1.25rem; }
+      .doc-header h1 { font-size: 1.2rem; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page { padding: 0; }
+      .article, .signatures { border: 1px solid #ccc; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <header class="doc-header">
+    <span class="lamp">🏮</span>
+    <h1>Beacon Educational Consult</h1>
+    <p class="subtitle">Partnership Agreement &mdash; Joint Development and Sale of Academic Materials<br>
+    Schemes of Work &bull; Lesson Plans &bull; Examination Questions &bull; Textbooks &bull; Workbooks</p>
+  </header>
+
+  <!-- ARTICLE 1 -->
+  <section class="article">
+    <h2 class="article-title"><span class="article-num">Article 1</span> Name, Purpose and Status</h2>
+
+    <h3>1.1 Name</h3>
+    <p>This partnership shall operate under the name <strong>Beacon Educational Consult</strong>.</p>
+
+    <h3>1.2 Purpose</h3>
+    <p>This partnership exists to advance the quality of education in Ghanaian basic schools through four interconnected purposes:</p>
+    <ol>
+      <li><strong>Professional Collaboration and Resource Sharing.</strong> To bring together experienced, practicing educators to collaborate in planning, sharing, and improving teaching resources, so that the knowledge and expertise held by individual teachers benefits the wider group and, ultimately, their learners.</li>
+      <li><strong>Development and Distribution of Curriculum-Aligned Academic Materials.</strong> To collaboratively plan, develop, produce, and distribute high-quality academic materials — including Schemes of Work, Lesson Notes, End-of-Term Examination Questions, Textbooks, and Workbooks — that are fully aligned with the NaCCA/GES curriculum and support effective teaching and learning in basic schools across Ghana.</li>
+      <li><strong>Commercial Sustainability through the Sale of Educational Materials.</strong> To market and sell the partnership's academic materials to schools and individual educators, generating revenue that sustains the partnership's operations, fairly compensates contributing partners, and funds continued material development.</li>
+      <li><strong>Capacity Building for the Wider Educational Community.</strong> To contribute beyond the partnership itself by organizing workshops, seminars, and conferences for fellow educators — sharing the professional knowledge, curriculum expertise, and practical experience that the partners have collectively gained, thereby strengthening the broader teaching profession in Ghana.</li>
+    </ol>
+
+    <h3>1.3 Specific Objectives</h3>
+    <p>In pursuit of the purposes above, the partnership shall:</p>
+    <ul>
+      <li>Develop and maintain a growing catalog of NaCCA-aligned academic materials across key subjects and grade levels</li>
+      <li>Establish and follow a rigorous production and quality assurance workflow before releasing any material for sale</li>
+      <li>Build and sustain direct relationships with schools, circuit supervisors, and education stakeholders for material distribution</li>
+      <li>Organize at least <span class="placeholder">[X]</span> professional development event(s) per year — workshops, seminars, or conferences — open to educators beyond the partnership</li>
+      <li>Ensure all partners engage in continuous professional learning and development as a condition of active membership</li>
+      <li>Pursue registration and listing of eligible materials through NaCCA's textbook evaluation process where appropriate</li>
+    </ul>
+
+    <h3>1.4 Legal Status</h3>
+    <p>The partners agree to register this entity as a <span class="placeholder">[business name / partnership / limited liability company]</span> with the Registrar General's Department, and to obtain a Ghana Revenue Authority Taxpayer Identification Number (TIN), before any commercial sale of materials begins.</p>
+    <p><em>Registration type to be confirmed: a registered partnership or business name is simpler and cheaper to set up; a limited liability company offers stronger personal liability protection for partners as revenue and risk grow.</em></p>
+  </section>
+
+  <!-- ARTICLE 2 -->
+  <section class="article">
+    <h2 class="article-title"><span class="article-num">Article 2</span> Partners and Contributions</h2>
+
+    <h3>2.1 Founding Partners</h3>
+    <p>The founding partners of this agreement are listed below, along with their subject specialism and initial role.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Name</th><th>Subject Specialism</th><th>Initial Role</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="placeholder">[Founder Name]</span></td>
+            <td>English Language, Computing, Integrated Science</td>
+            <td>Founder / Coordinator / Production Lead</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>2.2 Founder Recognition</h3>
+    <p><span class="placeholder">[Founder Name]</span> is recognized as the Founder of Beacon Educational Consult, having originated the concept and convened the founding partners. In recognition of this role, the Founder shall:</p>
+    <ul>
+      <li>Hold the title of Founder and <span class="placeholder">[Coordinator / Production Lead]</span> for the founding phase of the partnership, as set out in Article 6</li>
+      <li>Receive <span class="placeholder">[X]%</span> of the general fund allocation described in Article 5.1, in addition to any share earned through authorship or operational roles</li>
+      <li>Be designated "Founding Partner" in all official records of the partnership, a designation that continues to apply even after formal committee roles rotate</li>
+    </ul>
+    <p>This founder designation reflects origination and convening of the partnership. It does not entitle the Founder to sole ownership of jointly-developed works, a veto over partnership decisions, or a revenue share from materials authored by other partners beyond what is set out in Article 5. All such matters remain governed by the collective decision-making process in Article 6.2.</p>
+
+    <h3>2.3 Founder's Role in Production</h3>
+    <p>In addition to the Founder's governance role, <span class="placeholder">[Founder Name]</span> shall also serve as a contributing author and reviewer within the production workflow (Article 3), with subject specialism in English Language, Computing, and Integrated Science. Materials authored by the Founder under an assigned consortium project are jointly-owned works per Article 4.1 and revenue-shared per Article 5.1, on the same basis as any other partner's authored work — the Founder's authorship contributions are compensated separately from, and in addition to, the founder allocation in Article 2.2.</p>
+
+    <h3>2.4 Admission of New Partners</h3>
+    <p>New partners may be admitted by <span class="placeholder">[unanimous / two-thirds]</span> agreement of existing partners, and shall be bound by this agreement upon signing. New partners' share of revenue and ownership shall be agreed in writing at the point of admission.</p>
+
+    <h3>2.5 Withdrawal of a Partner</h3>
+    <p>A partner may withdraw with <span class="placeholder">[X weeks/months]</span> written notice. On withdrawal, the partner retains attribution as author of works they created, but forfeits any ongoing share of future revenue from jointly-owned works unless otherwise agreed. Materials already authored individually remain governed by Article 4 (Ownership).</p>
+  </section>
+
+  <!-- ARTICLE 3 -->
+  <section class="article">
+    <h2 class="article-title"><span class="article-num">Article 3</span> Production Workflow</h2>
+    <p>All materials produced under this partnership shall follow the workflow below, to ensure curriculum accuracy, consistency, and quality before release for sale.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Stage</th><th>Description</th><th>Responsible</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1. Planning &amp; Assignment</td><td>Identify needed materials per subject/grade/term against the NaCCA curriculum map; assign a lead author</td><td>Production Lead</td></tr>
+          <tr><td>2. Drafting</td><td>Lead author produces first draft using the consortium's standard template, citing NaCCA indicator codes</td><td>Lead Author</td></tr>
+          <tr><td>3. Curriculum Alignment Check</td><td>A second partner verifies indicator coverage, sequencing, and grade-appropriateness</td><td>Reviewing Partner</td></tr>
+          <tr><td>4. Editorial Review</td><td>Check language, formatting, house style, and (for exams) answer accuracy and mark allocation</td><td>Editor</td></tr>
+          <tr><td>5. Pilot Use <em>(recommended)</em></td><td>Trial the material in a live classroom for one unit before wide release</td><td>Author / volunteer</td></tr>
+          <tr><td>6. Approval &amp; Release</td><td>Final sign-off; format into sellable form (PDF/print); add to catalog</td><td>Steering Committee</td></tr>
+          <tr><td>7. NaCCA Submission <em>(textbooks/workbooks only)</em></td><td>Submit to NaCCA for evaluation and approval listing</td><td>Production Lead</td></tr>
+          <tr><td>8. Distribution &amp; Sales</td><td>Sell via agreed channels; track sales centrally</td><td>Sales/Distribution Lead</td></tr>
+          <tr><td>9. Revision Cycle</td><td>Review and update at least annually; track version numbers</td><td>Original Author + Reviewer</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Textbooks and workbooks intended for use as core instructional material should be submitted through NaCCA's textbook evaluation process for approval listing. Schemes of work, lesson plans, and exam questions do not require this approval and may be released to market once internal review (Stages 1–6) is complete.</p>
+  </section>
+
+  <!-- ARTICLE 4 -->
+  <section class="article">
+    <h2 class="article-title"><span class="article-num">Article 4</span> Ownership of Materials</h2>
+
+    <h3>4.1 Jointly-Developed Works</h3>
+    <p>Materials developed as part of an assigned consortium project (per Article 3) are jointly owned by the partnership as a whole, regardless of which individual partner authored the first draft.</p>
+
+    <h3>4.2 Individually-Authored Works</h3>
+    <p>A partner who independently develops material outside an assigned consortium project, using the consortium's branding and distribution channels, retains <span class="placeholder">[sole / majority]</span> ownership, subject to a revenue share with the partnership as agreed in Article 5.</p>
+
+    <h3>4.3 Attribution</h3>
+    <p>All materials shall credit the lead author(s) by name, alongside the consortium name, regardless of ownership classification.</p>
+
+    <h3>4.4 Use of Materials by Member Schools</h3>
+    <p><span class="placeholder">[Specify here whether member schools/teachers receive any discount, free access, or first-rights to materials produced, versus outside schools who pay full price.]</span></p>
+  </section>
+
+  <!-- ARTICLE 5 -->
+  <section class="article">
+    <h2 class="article-title"><span class="article-num">Article 5</span> Revenue Sharing</h2>
+
+    <h3>5.1 Revenue Split — Jointly-Developed Works</h3>
+    <p>Net revenue (after production and distribution costs) from jointly-developed works shall be split as follows:</p>
+    <ul>
+      <li><span class="placeholder">[X]%</span> to the lead/contributing author(s)</li>
+      <li><span class="placeholder">[X]%</span> to the partnership's general fund (covering operating costs, reinvestment, and reserves)</li>
+      <li><span class="placeholder">[X]%</span> distributed equally among all active partners</li>
+    </ul>
+
+    <h3>5.2 Revenue Split — Individually-Authored Works</h3>
+    <p>Net revenue from individually-authored works sold through consortium channels shall be split:</p>
+    <ul>
+      <li><span class="placeholder">[X]%</span> to the author</li>
+      <li><span class="placeholder">[X]%</span> to the partnership's general fund</li>
+    </ul>
+
+    <h3>5.3 Financial Reporting</h3>
+    <p>The Treasurer shall maintain sales and revenue records and provide a financial statement to all partners at least once per term.</p>
+
+    <h3>5.4 Use of the General Fund</h3>
+    <p>The general fund shall be used for <span class="placeholder">[printing/production costs, marketing, NaCCA submission fees, administrative costs, reserve for reinvestment]</span>. Any expenditure above <span class="placeholder">[amount]</span> requires approval by a majority of partners.</p>
+  </section>
+
+  <!-- ARTICLE 6 -->
+  <section class="article">
+    <h2 class="article-title"><span class="article-num">Article 6</span> Governance</h2>
+
+    <h3>6.1 Steering Committee Roles</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Role</th><th>Responsibility</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Founder / Coordinator</strong></td><td>Overall strategic direction, convenes steering committee, primary point of contact for external partners and GES</td></tr>
+          <tr><td><strong>Production Lead</strong></td><td>Maintains the materials pipeline, assigns authors, tracks progress through the production workflow</td></tr>
+          <tr><td><strong>Quality / Curriculum Officer</strong></td><td>Owns curriculum alignment checks, editorial standards, and NaCCA compliance across all materials</td></tr>
+          <tr><td><strong>Sales &amp; Distribution Lead</strong></td><td>Manages school relationships, pricing, order fulfilment, and marketing of Beacon materials</td></tr>
+          <tr><td><strong>Treasurer</strong></td><td>Manages the general fund, revenue distribution, and financial reporting to partners</td></tr>
+          <tr><td><strong>Secretary</strong></td><td>Maintains partner records, meeting minutes, and version history of this agreement</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>6.2 Departmental Structure</h3>
+    <p>Beacon Educational Consult shall operate through four academic departments, each led by a Head of Department (HoD) appointed by the steering committee.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Department</th><th>Levels</th><th>Subjects</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Pre-School</strong></td><td>Nursery, Kindergarten</td><td>Early childhood learning activities</td></tr>
+          <tr><td><strong>Lower Primary</strong></td><td>Basic 1, 2, 3</td><td>English Language, French Language, Ghanaian Language, Mathematics, Integrated Science, History, RME, Creative Arts &amp; Design</td></tr>
+          <tr><td><strong>Upper Primary</strong></td><td>Basic 4, 5, 6</td><td>English Language, French Language, Ghanaian Language, Mathematics, Integrated Science, History, RME, Computing, Creative Arts &amp; Design</td></tr>
+          <tr><td><strong>JHS</strong></td><td>Basic 7, 8, 9</td><td>English Language, French Language, Ghanaian Language, Mathematics, Integrated Science, Social Studies, RME, Computing, Creative Arts &amp; Design, Career Technology</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>6.3 Duties of a Head of Department</h3>
+    <p>Each Head of Department shall:</p>
+    <ul>
+      <li>Maintain the department's production schedule, tracking what materials are due, who is authoring them, and what stage each piece is at</li>
+      <li>Assign subjects and grade levels to members based on their declared expertise as submitted through Beacon's member registration form</li>
+      <li>Ensure the department's output covers all subjects and grade levels within its remit, with no gaps in the catalog</li>
+      <li>Review all materials for curriculum alignment before passing them to the Quality/Curriculum Officer for final sign-off</li>
+      <li>Return below-standard drafts to the author with specific written feedback rather than self-editing</li>
+      <li>Convene department meetings at least once per term to review progress, resolve blockers, and plan the next production cycle</li>
+      <li>Monitor member participation and flag persistent non-contribution to the steering committee</li>
+      <li>Submit a termly department report to the steering committee covering materials completed, in-progress, quality concerns, and professional development needs</li>
+      <li>Identify subject-area topics suitable for Beacon's workshops, seminars, and conferences, and co-design event content falling within the department's scope</li>
+    </ul>
+
+    <h3>6.4 Duties of Department Members</h3>
+    <p>Each department member shall:</p>
+    <ul>
+      <li>Accept authorship assignments from the Head of Department for specific materials at their declared grade level and subject</li>
+      <li>Produce drafts using Beacon's standard templates, citing the correct NaCCA content and performance indicators throughout</li>
+      <li>Submit drafts by the agreed deadline, or communicate early if a deadline cannot be met</li>
+      <li>Review at least one other member's draft per term, checking curriculum alignment, sequencing, and grade-appropriateness</li>
+      <li>Provide specific written feedback on reviewed drafts within the agreed review window</li>
+      <li>Pilot assigned materials in their own classroom where feasible, and report practical findings to the Head of Department</li>
+      <li>Engage in at least one professional development activity per term</li>
+      <li>Share any new curriculum guidance, GES circulars, or NaCCA updates relevant to their subject with the department promptly</li>
+      <li>Attend department meetings and respond to department communications within a reasonable timeframe</li>
+    </ul>
+
+    <h3>6.5 Subject Assignment</h3>
+    <p>Members shall declare their subject expertise and preferred authorship/review roles via Beacon's standard member registration form. Heads of Department use these declarations to assign work. Members may declare themselves as: <strong>Lead Author</strong> (confident to produce first drafts), <strong>Reviewer</strong> (able to peer-review but not yet lead-author), or <strong>Both</strong>. Subject assignments are reviewed termly and may be updated as members' expertise and confidence grow.</p>
+
+    <h3>6.6 Decision-Making</h3>
+    <p>Routine production and sales decisions are made by the relevant role-holder. Major decisions — admitting or removing partners, changing revenue splits, large expenditure, amending this agreement — require a vote as set out in Article 10.</p>
+
+    <h3>6.7 Meetings</h3>
+    <p>The full partnership shall meet <span class="placeholder">[frequency]</span> to review the production pipeline, sales performance, and finances. Department meetings shall be held at least once per term.</p>
+  </section>
+
+  <!-- ARTICLES 7–10 -->
+  <section class="article">
+    <h2 class="article-title"><span class="article-num">Article 7</span> Quality Assurance</h2>
+    <p>No material shall be released for sale without completing Stages 1–6 of the production workflow in Article 3. The Quality/Curriculum Officer holds authority to block release of any material that has not passed the curriculum alignment and editorial review stages, even if the original timeline is delayed as a result.</p>
+    <p>All released materials shall carry a version number and review date so that schools are always informed of the edition in use.</p>
+  </section>
+
+  <section class="article">
+    <h2 class="article-title"><span class="article-num">Article 8</span> Standard Templates</h2>
+    <p>All materials produced under Beacon Educational Consult shall be drafted using Beacon's approved standard templates, maintained by the Quality/Curriculum Officer. Templates exist for:</p>
+    <ul>
+      <li>Schemes of Work</li>
+      <li>Lesson Notes</li>
+      <li>End-of-Term Examination Questions</li>
+      <li>Textbooks</li>
+      <li>Workbooks</li>
+    </ul>
+    <p>Use of the standard template is a requirement for a draft to proceed to peer review. Templates may be updated termly by the Quality/Curriculum Officer following partner consultation.</p>
+  </section>
+
+  <section class="article">
+    <h2 class="article-title"><span class="article-num">Article 9</span> Confidentiality and Non-Compete</h2>
+    <p>Partners agree not to independently reproduce or sell jointly-owned Beacon materials outside the partnership without written consent from the other partners.</p>
+    <p><em>Optional: partners agree not to develop directly competing materials for sale outside the consortium while an active partner, to be reviewed if this proves impractical.</em></p>
+  </section>
+
+  <section class="article">
+    <h2 class="article-title"><span class="article-num">Article 10</span> Amendments and Dispute Resolution</h2>
+
+    <h3>10.1 Amendments</h3>
+    <p>This agreement may be amended by <span class="placeholder">[two-thirds majority / unanimous]</span> vote of partners, provided proposed changes are circulated at least <span class="placeholder">[X]</span> days in advance.</p>
+
+    <h3>10.2 Dispute Resolution</h3>
+    <p>Disputes between partners shall first be addressed through internal discussion at a steering committee meeting. If unresolved, partners agree to seek mediation before pursuing formal legal action.</p>
+  </section>
+
+  <!-- SIGNATURES -->
+  <section class="signatures">
+    <h2>Adoption</h2>
+    <p>This partnership agreement was adopted by the undersigned partners on the date below.</p>
+
+    <p class="date-line">Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+    <div class="sig-block">
+      <div class="sig-entry">
+        <div class="sig-line"></div>
+        <div class="sig-label">Partner Name &amp; Signature</div>
+      </div>
+      <div class="sig-entry">
+        <div class="sig-line"></div>
+        <div class="sig-label">Partner Name &amp; Signature</div>
+      </div>
+      <div class="sig-entry">
+        <div class="sig-line"></div>
+        <div class="sig-label">Partner Name &amp; Signature</div>
+      </div>
+      <div class="sig-entry">
+        <div class="sig-line"></div>
+        <div class="sig-label">Partner Name &amp; Signature</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
