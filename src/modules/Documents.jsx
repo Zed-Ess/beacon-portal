@@ -3,13 +3,11 @@ import {
   collection, addDoc, onSnapshot,
   query, orderBy, serverTimestamp, deleteDoc, doc
 } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
-import { db, storage } from "../firebase";
+import { db } from "../firebase";
 import { useAuth } from "../context/AuthContext";
 import styles from "./Documents.module.css";
 
 const CATEGORIES = ["Governance", "Templates", "Completed Materials", "Reports", "Other"];
-const MAX_MB = 20;
 
 export default function Documents() {
   const { profile } = useAuth();
@@ -17,7 +15,6 @@ export default function Documents() {
   const [pipeline, setPipeline] = useState([]);
   const [showForm, setShow]     = useState(false);
   const [catFilter, setCat]     = useState("All");
-  const [file, setFile]         = useState(null);
   const [error, setError]       = useState("");
   const [form, setForm]         = useState({
     title: "", url: "", category: "Templates", description: "", status: "Active", pipelineId: ""
@@ -47,31 +44,12 @@ export default function Documents() {
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
-    if (!file && !form.url) {
-      setError("Attach a file or provide a link.");
-      return;
-    }
-    if (file && file.size > MAX_MB * 1024 * 1024) {
-      setError(`File is too large (max ${MAX_MB} MB).`);
-      return;
-    }
     setSaving(true);
     try {
-      let url = form.url;
-      let storagePath = "";
-      let fileName = "";
-      if (file) {
-        storagePath = `documents/${Date.now()}_${file.name}`;
-        const snap = await uploadBytes(ref(storage, storagePath), file);
-        url = await getDownloadURL(snap.ref);
-        fileName = file.name;
-      }
       const linked = pipeline.find((p) => p.id === form.pipelineId);
       await addDoc(collection(db, "documents"), {
         title:         form.title,
-        url,
-        storagePath,
-        fileName,
+        url:           form.url,
         category:      form.category,
         description:   form.description,
         status:        form.status,
@@ -82,11 +60,10 @@ export default function Documents() {
         createdAt:     serverTimestamp(),
       });
       setForm({ title: "", url: "", category: "Templates", description: "", status: "Active", pipelineId: "" });
-      setFile(null);
       setShow(false);
     } catch (err) {
       console.error(err);
-      setError("Upload failed. Please try again.");
+      setError("Could not save. Please try again.");
     }
     setSaving(false);
   }
@@ -94,10 +71,6 @@ export default function Documents() {
   async function handleDelete(d) {
     if (!window.confirm("Remove this document?")) return;
     await deleteDoc(doc(db, "documents", d.id));
-    if (d.storagePath) {
-      // Best-effort: remove the stored file too
-      deleteObject(ref(storage, d.storagePath)).catch(() => {});
-    }
   }
 
   const isManager = profile?.role === "founder" || profile?.role === "hod";
@@ -128,11 +101,8 @@ export default function Documents() {
         <form className={styles.form} onSubmit={handleSubmit}>
           <h3>Add Document</h3>
           <label>Title<input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} required /></label>
-          <label>Upload File <span className={styles.hint}>(Word, PDF, etc. — max {MAX_MB} MB)</span>
-            <input type="file" onChange={(e) => setFile(e.target.files?.[0] ?? null)} />
-          </label>
-          <label>…or Link <span className={styles.hint}>(Google Drive, etc.)</span>
-            <input type="url" value={form.url} onChange={(e) => setForm({ ...form, url: e.target.value })} placeholder="https://…" />
+          <label>Link <span className={styles.hint}>(Google Drive, Dropbox, etc.)</span>
+            <input type="url" value={form.url} onChange={(e) => setForm({ ...form, url: e.target.value })} placeholder="https://…" required />
           </label>
           <div className={styles.row}>
             <label>Category
@@ -156,7 +126,7 @@ export default function Documents() {
           </label>
           <label>Description<textarea rows={2} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} /></label>
           <button type="submit" className={styles.submitBtn} disabled={saving}>
-            {saving ? "Uploading…" : "Add Document"}
+            {saving ? "Saving…" : "Add Document"}
           </button>
         </form>
       )}
@@ -174,7 +144,7 @@ export default function Documents() {
                   rel="noopener noreferrer"
                   className={styles.docTitle}
                 >
-                  {d.title} {d.fileName ? "📎" : "↗"}
+                  {d.title} ↗
                 </a>
                 <div className={styles.headRight}>
                   <span className={`${styles.status} ${styles[`status_${d.status?.toLowerCase()}`]}`}>

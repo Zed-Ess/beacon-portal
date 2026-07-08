@@ -95,12 +95,6 @@ can read or write any portal data — a pending or rejected account can only see
 its own profile. Only the Founder can approve members or change roles, and
 members cannot promote or approve themselves.
 
-### Step 6b: Enable Storage and set its rules
-
-File uploads (Documents module) use Firebase Storage:
-
-1. Go to **Build → Storage** and click **Get started**
-2. Go to **Storage → Rules**, paste the contents of **`storage.rules`**, and click **Publish**
 
 ### Step 7: Deploy to GitHub Pages
 

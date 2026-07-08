@@ -6,7 +6,87 @@ import {
 import { db } from "../firebase";
 import { useAuth } from "../context/AuthContext";
 import { SUBJECTS, CLASSES, TERMS, DEPARTMENTS } from "../constants";
+import { CURRICULUM } from "../curriculum";
 import styles from "./Builder.module.css";
+
+/* Drill-down picker over the bundled NaCCA curriculum data:
+   Strand → Sub-Strand → Content Standard → Indicators → auto-fill the form. */
+function CurriculumPicker({ className, subject, onApply }) {
+  const [si, setSi]         = useState("");
+  const [bi, setBi]         = useState("");
+  const [ci, setCi]         = useState("");
+  const [picked, setPicked] = useState([]);
+
+  const strands = CURRICULUM[className]?.[subject];
+  if (!strands) {
+    return (
+      <p className={styles.pickerHint}>
+        No curriculum data loaded yet for <b>{className} · {subject}</b> — fill the fields manually,
+        or ask the Founder to add this curriculum.
+      </p>
+    );
+  }
+
+  const strand = si !== "" ? strands[+si] : null;
+  const sub    = bi !== "" ? strand?.subStrands[+bi] : null;
+  const std    = ci !== "" ? sub?.standards[+ci] : null;
+
+  const togglePick = (code) =>
+    setPicked((p) => (p.includes(code) ? p.filter((c) => c !== code) : [...p, code]));
+
+  function apply() {
+    if (!std) return;
+    const chosen = std.indicators.filter((ind) => picked.length === 0 || picked.includes(ind.code));
+    onApply({
+      strand:     strand.name,
+      subStrand:  sub.name,
+      standard:   `${std.code} — ${std.title}`,
+      indicators: chosen.map((ind) => `${ind.code} — ${ind.text}`).join("\n"),
+    });
+    setPicked([]);
+  }
+
+  return (
+    <div className={styles.picker}>
+      <div className={styles.pickerHead}>📚 Pick from the NaCCA {className} {subject} curriculum</div>
+      <div className={styles.pickerRow}>
+        <select value={si} onChange={(e) => { setSi(e.target.value); setBi(""); setCi(""); setPicked([]); }}>
+          <option value="">Strand…</option>
+          {strands.map((s, i) => <option key={i} value={i}>{s.name}</option>)}
+        </select>
+        <select value={bi} disabled={!strand} onChange={(e) => { setBi(e.target.value); setCi(""); setPicked([]); }}>
+          <option value="">Sub-Strand…</option>
+          {strand?.subStrands.map((s, i) => <option key={i} value={i}>{s.name}</option>)}
+        </select>
+        <select value={ci} disabled={!sub} onChange={(e) => { setCi(e.target.value); setPicked([]); }}>
+          <option value="">Content Standard…</option>
+          {sub?.standards.map((s, i) => <option key={i} value={i}>{s.code} — {s.title.slice(0, 60)}{s.title.length > 60 ? "…" : ""}</option>)}
+        </select>
+      </div>
+
+      {std && (
+        <>
+          <p className={styles.pickerStd}><b>{std.code}</b>: {std.title}</p>
+          <div className={styles.pickerInds}>
+            {std.indicators.map((ind) => (
+              <label key={ind.code} className={styles.pickerInd}>
+                <input
+                  type="checkbox"
+                  checked={picked.includes(ind.code)}
+                  onChange={() => togglePick(ind.code)}
+                />
+                <span><b>{ind.code}</b> — {ind.text}</span>
+              </label>
+            ))}
+          </div>
+          <button type="button" className={styles.pickerApply} onClick={apply}>
+            ⤵ Fill form {picked.length > 0 ? `(${picked.length} indicator${picked.length > 1 ? "s" : ""})` : "(all indicators)"}
+          </button>
+        </>
+      )}
+    </div>
+  );
+}
 
 const blankWeek = () => ({
   week: "", strand: "", subStrand: "", standard: "", indicators: "", resources: ""
@@ -224,6 +304,12 @@ export default function Builder() {
                     </button>
                   )}
                 </div>
+                <CurriculumPicker
+                  key={`${draft.className}|${draft.subject}`}
+                  className={draft.className}
+                  subject={draft.subject}
+                  onApply={(vals) => setWeek(i, vals)}
+                />
                 <div className={styles.row}>
                   <label>Week No.<input value={w.week} onChange={(e) => setWeek(i, { week: e.target.value })} placeholder={`${i + 1}`} /></label>
                   <label>Strand<input value={w.strand} onChange={(e) => setWeek(i, { strand: e.target.value })} /></label>
@@ -244,6 +330,17 @@ export default function Builder() {
         ) : (
           <>
             <h4 className={styles.sectionTitle}>Lesson Details</h4>
+            <CurriculumPicker
+              key={`${draft.className}|${draft.subject}`}
+              className={draft.className}
+              subject={draft.subject}
+              onApply={(vals) => setLesson({
+                strand:    vals.strand,
+                subStrand: vals.subStrand,
+                standard:  vals.standard,
+                indicator: vals.indicators,
+              })}
+            />
             <div className={styles.row}>
               <label>Week<input value={draft.lesson.week} onChange={(e) => setLesson({ week: e.target.value })} /></label>
               <label>Duration<input value={draft.lesson.duration} onChange={(e) => setLesson({ duration: e.target.value })} /></label>
@@ -254,7 +351,7 @@ export default function Builder() {
               <label>Sub-Strand<input value={draft.lesson.subStrand} onChange={(e) => setLesson({ subStrand: e.target.value })} /></label>
             </div>
             <label>Content Standard<input value={draft.lesson.standard} onChange={(e) => setLesson({ standard: e.target.value })} placeholder="e.g. B4.1.1.1" /></label>
-            <label>Indicator<input value={draft.lesson.indicator} onChange={(e) => setLesson({ indicator: e.target.value })} placeholder="e.g. B4.1.1.1.1" /></label>
+            <label>Indicator(s)<textarea rows={2} value={draft.lesson.indicator} onChange={(e) => setLesson({ indicator: e.target.value })} placeholder="e.g. B1.1.1.1.1 — …" /></label>
             <label>Performance Indicator<textarea rows={2} value={draft.lesson.performance} onChange={(e) => setLesson({ performance: e.target.value })} placeholder="Learners can …" /></label>
             <div className={styles.row}>
               <label>Core Competencies<input value={draft.lesson.competencies} onChange={(e) => setLesson({ competencies: e.target.value })} placeholder="e.g. CC, CP, PL" /></label>
@@ -332,7 +429,7 @@ function exportWord(m) {
   const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${esc(m.title)}</title></head>
     <body style="font-family:Calibri,Arial,sans-serif">${head}${body}</body></html>`;
 
-  const blob = new Blob(["\ufeff" + html], { type: "application/msword" });
+  const blob = new Blob(["﻿" + html], { type: "application/msword" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
   a.download = `${m.title.replace(/[^\w\- ]+/g, "").trim() || "material"}.doc`;

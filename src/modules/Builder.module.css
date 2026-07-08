@@ -231,3 +231,87 @@
 }
 
 .addWeekBtn:hover { background: #fdf0e9; }
+
+/* ---- curriculum drill-down picker ---- */
+
+.picker {
+  border: 1.5px solid #fcd9c5;
+  background: #fff8f4;
+  border-radius: 10px;
+  padding: 0.75rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.pickerHead {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #c94d1e;
+}
+
+.pickerHint {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  margin: 0;
+}
+
+.pickerRow {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pickerRow select {
+  flex: 1;
+  min-width: 150px;
+  padding: 0.45rem 0.6rem;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  background: #fff;
+}
+
+.pickerStd {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #374151;
+}
+
+.pickerInds {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.pickerInd {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start;
+  gap: 0.5rem !important;
+  font-size: 0.78rem !important;
+  font-weight: 400 !important;
+  color: #4b5563 !important;
+  cursor: pointer;
+}
+
+.pickerInd input { width: auto !important; margin-top: 2px; }
+
+.pickerApply {
+  align-self: flex-start;
+  padding: 0.4rem 0.9rem;
+  background: #e85d26;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pickerApply:hover { background: #c94d1e; }
